@@ -9,11 +9,56 @@
         <copyright>CyrusHao</copyright>
         <lastBuildDate>Wed, 23 Apr 2025 23:20:21 +0800</lastBuildDate><atom:link href="https://Cyrus-hao.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>前置知识</title>
-        <link>https://Cyrus-hao.github.io/p/%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/</link>
+        <link>https://Cyrus-hao.github.io/p/test-chinese/</link>
         <pubDate>Wed, 23 Apr 2025 23:20:21 +0800</pubDate>
         
-        <guid>https://Cyrus-hao.github.io/p/%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/</guid>
-        <description></description>
+        <guid>https://Cyrus-hao.github.io/p/test-chinese/</guid>
+        <description>&lt;img src="https://Cyrus-hao.github.io/p/test-chinese/cold_Crime.jpg" alt="Featured image of post 前置知识" /&gt;&lt;h2 id=&#34;前置知识&#34;&gt;前置知识
+&lt;/h2&gt;&lt;p&gt;希望我的学习路线能对大家有所帮助 欢迎批评指正~&lt;/p&gt;
+&lt;h3 id=&#34;249---251&#34;&gt;24.9 -&amp;gt; 25.1
+&lt;/h3&gt;&lt;p&gt;江科大stm32(上手度高 与正点原子 野火等相比理论略显不足但有较高动手乐趣)   &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1th411z7sn/?spm_id_from=333.337.search-card.all.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;&lt;br&gt;
+stm32循迹避障小车(当时买套件学纯代码 可手搓个麦轮小车比买套件有意思)  &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1At421h7Ui/?spm_id_from=333.337.search-card.all.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;&lt;br&gt;
+PCB绘图(嘉立创)  &lt;br&gt;
+正点原子电机控制(不推荐买课程电机驱动板 容易吃灰)   &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1hv4y1g7s3/?spm_id_from=333.337.search-card.all.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;&lt;br&gt;
+matlab(感觉不用特意去学 数模快到前几天刷一遍就行)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/playlist?list=PLVHBjRDK0kALcQMwAFbR5q2driYZCHNIx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;youtube&lt;/a&gt;&lt;br&gt;
+24电赛省赛三子棋(视觉部分方法挺多 做着玩锻炼思维 做个完整项目进步还是较快的)  &lt;br&gt;
+opencv(不是特别推荐我看的这个 都去看cs231吧haha)  &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1PV411774y/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=2f50930509c568406539e7a29e43c090&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;
+cs231(部分 后期末考试 鸽) &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=vT1JzLTH4G4&amp;amp;list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;youtube&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;251---252&#34;&gt;25.1 -&amp;gt; 25.2
+&lt;/h3&gt;&lt;p&gt;寒假直接忘本 化身纯摆小子hah 别学&lt;/p&gt;
+&lt;p&gt;线性代数(吴恩达老师把线代和机器学习混起来讲的 感觉不错 推)  &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Pg4y1X7Pa/?spm_id_from=333.337.search-card.all.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;
+西瓜书(仅仅止步于第三章 去图书馆边看边睡hah 大部分手撕数学原理 不推荐一开始直接去看)  &lt;br&gt;
+蓝桥杯嵌入式(力推下面的up 比赛前看的 暑假看的那个模板有一定问题)   &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1wi4y1172U/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;252---254now&#34;&gt;25.2 -&amp;gt; 25.4(now)
+&lt;/h3&gt;&lt;p&gt;机器学习(吴恩达 挺好就是后面字幕有一定问题 会干扰理解)  &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Bq421A74G/?spm_id_from=333.337.search-card.all.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;     &lt;br&gt;
+鱼书(神经网络部分直观 反向传播等理论通俗易懂 好！)  &lt;br&gt;
+pytorch(小土堆 讲的超级棒 重视实践 我把他的视频都刷了遍hah)   &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1hE411t7RN/?spm_id_from=333.1007.top_right_bar_window_custom_collection.content.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;   &lt;br&gt;
+强化学习数学原理(公式部分有些看不懂 暂鸽)&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1sd4y167NS/?spm_id_from=333.337.search-card.all.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;bilibili&lt;/a&gt;&lt;br&gt;
+动手学深度学习(在读ing 理论部分清晰 清晰记得当时信息论引入交叉熵豁然开朗)  &lt;br&gt;
+李沐带读论文系列(在看ing 沐神还是挺有趣的哈哈)&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Introduction</title>
