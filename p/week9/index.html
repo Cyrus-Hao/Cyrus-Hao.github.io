@@ -359,8 +359,9 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
             <li><a href="#四-训练数据增强">(四) 训练数据增强</a></li>
             <li><a href="#五-总结">(五) 总结</a></li>
             <li><a href="#pointmap-branch-和-camera-branch">Pointmap Branch 和 Camera Branch</a></li>
+            <li><a href="#camera-branch">Camera Branch</a></li>
             <li><a href="#pointmap-branch">Pointmap Branch</a></li>
-            <li><a href="#pointmap-branch-1">Pointmap Branch</a></li>
+            <li><a href="#code">Code</a></li>
           </ol>
         </li>
       </ol>
@@ -518,7 +519,7 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis="340px"
 	
 ></p>
-<h4 id="pointmap-branch">Pointmap Branch
+<h4 id="camera-branch">Camera Branch
 </h4><p><img src="/p/week9/p5.png"
 	width="2479"
 	height="1485"
@@ -533,7 +534,7 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis="400px"
 	
 ></p>
-<h4 id="pointmap-branch-1">Pointmap Branch
+<h4 id="pointmap-branch">Pointmap Branch
 </h4><p><img src="/p/week9/p6.png"
 	width="2479"
 	height="1485"
@@ -548,6 +549,169 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis="400px"
 	
 ></p>
+<h4 id="code">Code
+</h4><h5 id="vggt_to_colmappy">vggt_to_colmap.py
+</h5><h6 id="1-模型加载与推理run_model-函数">1. 模型加载与推理（run_model 函数）
+</h6><p><strong>功能：</strong>                     <br>
+从指定目录加载图像，运行 VGGT 模型推理，生成 3D 点云和相机参数。                 <br>
+支持 Pointmap Branch（直接预测 3D 点）和 Depthmap + Camera Branch（通过深度图和相机参数生成点云）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">images</span> <span class="o">=</span> <span class="n">load_and_preprocess_images</span><span class="p">(</span><span class="n">image_names</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">amp</span><span class="o">.</span><span class="n">autocast</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">extrinsic</span><span class="p">,</span> <span class="n">intrinsic</span> <span class="o">=</span> <span class="n">pose_encoding_to_extri_intri</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s2">&#34;pose_enc&#34;</span><span class="p">],</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">depth_map</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&#34;depth&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">world_points</span> <span class="o">=</span> <span class="n">unproject_depth_map_to_point_map</span><span class="p">(</span><span class="n">depth_map</span><span class="p">,</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&#34;extrinsic&#34;</span><span class="p">],</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&#34;intrinsic&#34;</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>输入：</strong>            <br>
+图像目录（target_dir/images）中的图像文件。               <br>
+<strong>预处理：</strong>      <br>
+通过 load_and_preprocess_images 将图像转换为张量（形状 [S, C, H, W]，S 为图像数量）。                 <br>
+<strong>推理：</strong>            <br>
+使用 VGGT 模型生成预测，包括 depth（深度图）、world_points（Pointmap Branch 的 3D 点图）、pose_enc（Camera Branch 的姿态编码）。           <br>
+自动混合精度（torch.cuda.amp.autocast）提高推理效率。                            <br>
+<strong>后处理：</strong>            <br>
+pose_enc 转换为相机内外参（extrinsic 和 intrinsic）。                  <br>
+深度图通过 unproject_depth_map_to_point_map 结合相机参数生成 3D 点（world_points_from_depth）。          <br>
+<strong>输出：</strong>                   <br>
+predictions 字典，包含 depth、 world_points、 world_points_from_depth、 extrinsic、 intrinsic 等。</p>
+<p><strong>Pointmap Branch：</strong>          <br>
+输出 predictions[&ldquo;world_points&rdquo;]，直接预测每个像素的 3D 坐标（形状 [S, H, W, 3]）。          <br>
+在 prediction_mode=&ldquo;Pointmap Regression&rdquo; 时使用。      <br>
+<strong>Camera Branch：</strong>         <br>
+输出 predictions[&ldquo;pose_enc&rdquo;]，通过 pose_encoding_to_extri_intri 转换为 extrinsic（4×4 矩阵）和 intrinsic（3×3 矩阵）。         <br>
+用于相机姿态估计和深度图到点云的转换。</p>
+<h6 id="2-文件处理handle_uploads-函数">2. 文件处理（handle_uploads 函数）
+</h6><p><strong>功能：</strong>                      <br>
+处理用户上传的视频或图像，创建临时目录（input_images_<timestamp>），存储图像文件。                <br>
+视频会按每秒一帧提取为图像。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S_</span><span class="si">%f</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">target_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;input_images_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">target_dir_images</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_dir</span><span class="p">,</span> <span class="s2">&#34;images&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">input_video</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vs</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">frame_interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fps</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># 1 frame/sec</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gotit</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">gotit</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="n">frame_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_dir_images</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">video_frame_num</span><span class="si">:</span><span class="s2">06</span><span class="si">}</span><span class="s2">.png&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>视频处理：</strong> 使用 cv2.VideoCapture 按每秒一帧提取图像，保存为 PNG 文件。      <br>
+<strong>图像处理：</strong> 直接复制上传的图像到临时目录。         <br>
+<strong>输出：</strong> 临时目录路径（target_dir）和图像路径列表（image_paths）。         <br>
+<strong>作用：</strong> 为 run_model 提供输入图像目录，确保上传数据格式统一。</p>
+<h6 id="3-界面更新update_gallery_on_upload-函数">3. 界面更新（update_gallery_on_upload 函数）
+</h6><p><strong>功能：</strong>             <br>
+在用户上传视频或图像时，调用 handle_uploads 处理文件，并更新画廊显示上传的图像。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="ow">not</span> <span class="n">input_video</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">input_images</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl"><span class="n">target_dir</span><span class="p">,</span> <span class="n">image_paths</span> <span class="o">=</span> <span class="n">handle_uploads</span><span class="p">(</span><span class="n">input_video</span><span class="p">,</span> <span class="n">input_images</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">image_paths</span><span class="p">,</span> <span class="s2">&#34;Upload complete. Click &#39;Reconstruct&#39; to begin 3D processing.&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>逻辑:</strong> 检查是否有上传内容，若无则返回空值；否则处理文件并返回目录、图像路径和提示信息。             <br>
+<strong>输出:</strong> 更新 Gradio 画廊（image_gallery）和日志（log_output）。</p>
+<h6 id="4-3d-重建gradio_demo-函数">4. 3D 重建（gradio_demo 函数）
+</h6><p><strong>功能：</strong>                        <br>
+调用 run_model 进行推理，生成 3D 点云和相机参数。        <br>
+使用 predictions_to_glb 将预测结果转换为 GLB 文件。            <br>
+支持用户调整参数（如置信度阈值、帧过滤、天空分割）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">predictions</span> <span class="o">=</span> <span class="n">run_model</span><span class="p">(</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="n">prediction_save_path</span><span class="p">,</span> <span class="o">**</span><span class="n">predictions</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">glbscene</span> <span class="o">=</span> <span class="n">predictions_to_glb</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">predictions</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conf_thres</span><span class="o">=</span><span class="n">conf_thres</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filter_by_frames</span><span class="o">=</span><span class="n">frame_filter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mask_black_bg</span><span class="o">=</span><span class="n">mask_black_bg</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mask_white_bg</span><span class="o">=</span><span class="n">mask_white_bg</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">show_cam</span><span class="o">=</span><span class="n">show_cam</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mask_sky</span><span class="o">=</span><span class="n">mask_sky</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">target_dir</span><span class="o">=</span><span class="n">target_dir</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prediction_mode</span><span class="o">=</span><span class="n">prediction_mode</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">glbscene</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">file_obj</span><span class="o">=</span><span class="n">glbfile</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>推理：</strong>  调用 run_model 获取预测。               <br>
+<strong>保存：</strong>  将预测结果保存为 .npz 文件（predictions.npz），便于后续可视化调整。               <br>
+<strong>GLB 生成：</strong>                 <br>
+predictions_to_glb 根据 prediction_mode 选择使用 world_points（Pointmap Branch）或 world_points_from_depth（Depthmap + Camera Branch）。                            <br>
+应用过滤条件（conf_thres、 mask_sky 等）优化点云。                       <br>
+如果 show_cam=True，在 GLB 中显示相机位置。             <br>
+<strong>输出：</strong>  GLB 文件路径（glbfile）、日志信息和更新后的帧选择下拉菜单。</p>
+<p><strong>Pointmap Branch：</strong> <br>
+当 prediction_mode=&ldquo;Pointmap Regression&rdquo; 时，使用 predictions[&ldquo;world_points&rdquo;] 作为点云。     <br>
+直接提供 3D 坐标，减少对相机参数的依赖。</p>
+<p><strong>Camera Branch：</strong><br>
+提供 extrinsic 和 intrinsic，用于：           <br>
+Depthmap 模式下生成 world_points_from_depth。             <br>
+在 GLB 中可视化相机位置（show_cam=True）。</p>
+<h6 id="5-辅助功能">5. 辅助功能
+</h6><p><strong>clear_fields</strong>：清除 3D 查看器、临时目录和画廊，恢复初始状态。              <br>
+<strong>update_log</strong>：显示“正在加载和重建”提示。             <br>
+<strong>update_visualization</strong>：               <br>
+当用户调整参数（如 conf_thres、 frame_filter、 prediction_mode）时，加载保存的 .npz 文件，重新生成 GLB 文件。           <br>
+避免重复运行推理，提高交互效率。               <br>
+如果是示例数据（is_example=&ldquo;True&rdquo;），提示用户先点击“Reconstruct”。</p>
 
 </section>
 
