@@ -7,7 +7,70 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>CyrusHao</copyright>
-        <lastBuildDate>Wed, 23 Apr 2025 23:20:21 +0800</lastBuildDate><atom:link href="https://Cyrus-hao.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 26 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Cyrus-hao.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Week9</title>
+        <link>https://Cyrus-hao.github.io/p/week9/</link>
+        <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://Cyrus-hao.github.io/p/week9/</guid>
+        <description>&lt;img src="https://Cyrus-hao.github.io/p/week9/4.24.png" alt="Featured image of post Week9" /&gt;&lt;h2 id=&#34;426&#34;&gt;4.26
+&lt;/h2&gt;&lt;p&gt;鼠鼠打算试试申暑研  善良的老师推了zju的一位做3DGS的大牛  遂开始换方向开始3DGS方向的学习  昨晚和做定位的高手学长聊了下  收获满满捏  周六较闲  开始该方向论文的检索&lt;/p&gt;
+&lt;h3 id=&#34;vggt-visual-geometry-grounded-transformer&#34;&gt;VGGT: Visual Geometry Grounded Transformer
+&lt;/h3&gt;&lt;p&gt;介绍了一种前馈神经网络VGGT，能够从单个或多个图像视图中直接预测场景的3D属性，包括相机参数、点图、深度图和3D点轨迹。该模型在多个3D任务中表现出色，如相机参数估计、多视图深度估计和密集点云重建，且处理速度快（不到一秒）。               &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p1.png&#34;
+	width=&#34;1452&#34;
+	height=&#34;478&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p1_hu_905b4a5ba117532.png 480w, https://Cyrus-hao.github.io/p/week9/p1_hu_74ed7c00cf1c3f97.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Architecture Overview&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;303&#34;
+		data-flex-basis=&#34;729px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;一-输入图像处理&#34;&gt;(一) 输入图像处理
+&lt;/h4&gt;&lt;p&gt;图像分块与特征提取:     &lt;br&gt;
+VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在训练早期阶段表现更稳定，且对超参数（如学习率和动量）不敏感，相比之下，14×14的卷积层在初期可能不稳定)提取特征生成tokens，并添加位置嵌入以保留空间信息 这一步确保模型能稳定处理图像。
+位置嵌入:              &lt;br&gt;
+在tokens上添加位置嵌入 以保留图像的空间关系。这一步对于保持transformer对空间信息的感知至关重要。&lt;/p&gt;
+&lt;h4 id=&#34;二-transformer架构&#34;&gt;(二) Transformer架构
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;交替注意力机制&lt;/strong&gt;： &lt;br&gt;
+模型采用24层的transformer，使用交替注意力机制，交替处理帧内和全局信息。每个注意力层有1024维特征和16个头，类似于DINOv2的ViT-L配置
+注意力机制交替在帧内（frame-wise）和全局（global）之间工作：&lt;br&gt;
+帧内注意力：关注单个图像帧内的局部细节，适合捕捉细粒度的特征。  &lt;br&gt;
+全局注意力：跨多个视图理解全局场景，适合处理多视图一致性。&lt;/p&gt;
+&lt;h4 id=&#34;三-特征提取与上采样&#34;&gt;(三) 特征提取与上采样
+&lt;/h4&gt;&lt;p&gt;从特定层(4、11、17和23)提取tokens，通过DPT进行上采样，生成如深度图的高分辨率输出。这一步支持3D属性的精确预测。&lt;/p&gt;
+&lt;h4 id=&#34;四-训练数据增强&#34;&gt;(四) 训练数据增强
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;图像增强技术：&lt;/strong&gt;       &lt;br&gt;
+在训练过程中，随机应用以下增强，以提高模型对各种光照和噪声条件的鲁棒性：&lt;/p&gt;
+&lt;p&gt;颜色抖动（Color Jittering）：调整图像的亮度、对比度、饱和度和色调，模拟不同光照条件。&lt;/p&gt;
+&lt;p&gt;高斯模糊（Gaussian Blur）：应用模糊效果，模拟真实世界中的成像模糊。&lt;/p&gt;
+&lt;p&gt;灰度增强（Grayscale Augmentation）：将图像转换为灰度，测试模型在无颜色信息时的性能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;图像尺寸调整：&lt;/strong&gt;
+图像、深度图和点图被等比例调整，使最大维度为518像素。                 &lt;br&gt;
+较短的维度被裁剪到168~518像素之间，且必须是14像素的倍数，以匹配patchification的patch大小。这一步确保了输入数据的统一性和兼容性。&lt;/p&gt;
+&lt;h4 id=&#34;5总结&#34;&gt;5.总结
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p2.png&#34;
+	width=&#34;1291&#34;
+	height=&#34;448&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p2_hu_ae0a6be6c3c1cd48.png 480w, https://Cyrus-hao.github.io/p/week9/p2_hu_31d231c88f3d25ed.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;VGGT图像转换方法总结&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;288&#34;
+		data-flex-basis=&#34;691px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>前置知识</title>
         <link>https://Cyrus-hao.github.io/p/%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86/</link>
         <pubDate>Wed, 23 Apr 2025 23:20:21 +0800</pubDate>
