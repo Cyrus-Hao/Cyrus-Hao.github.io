@@ -13,10 +13,10 @@
         <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
         
         <guid>https://Cyrus-hao.github.io/p/week9/</guid>
-        <description>&lt;img src="https://Cyrus-hao.github.io/p/week9/p8.png" alt="Featured image of post Week9" /&gt;&lt;h2 id=&#34;426&#34;&gt;4.26
-&lt;/h2&gt;&lt;p&gt;鼠鼠打算试试申暑研  善良的老师推了zju的一位做3DGS的大牛  遂开始换方向开始3DGS方向的学习  昨晚和做定位的高手学长聊了下  收获满满捏  周六较闲  开始该方向论文的检索&lt;/p&gt;
-&lt;h3 id=&#34;vggt-visual-geometry-grounded-transformer&#34;&gt;VGGT: Visual Geometry Grounded Transformer
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p3.png&#34;
+        <description>&lt;img src="https://Cyrus-hao.github.io/p/week9/p8.png" alt="Featured image of post Week9" /&gt;&lt;h1 id=&#34;426&#34;&gt;4.26
+&lt;/h1&gt;&lt;p&gt;鼠鼠打算试试申暑研  善良的老师推了zju的一位做3DGS的大牛  遂开始换方向开始3DGS方向的学习  昨晚和做定位的高手学长聊了下  收获满满捏  周六较闲  开始该方向论文的检索&lt;/p&gt;
+&lt;h2 id=&#34;vggt-visual-geometry-grounded-transformer&#34;&gt;VGGT: Visual Geometry Grounded Transformer
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p3.png&#34;
 	width=&#34;738&#34;
 	height=&#34;228&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p3_hu_79d0df0c61db294a.png 480w, https://Cyrus-hao.github.io/p/week9/p3_hu_1aae8fb97ba46fdd.png 1024w&#34;
@@ -45,21 +45,21 @@
 		data-flex-basis=&#34;729px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h4 id=&#34;一-输入图像处理&#34;&gt;(一) 输入图像处理
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;图像分块与特征提取:&lt;/strong&gt;     &lt;br&gt;
+&lt;h3 id=&#34;一-输入图像处理&#34;&gt;(一) 输入图像处理
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;图像分块与特征提取:&lt;/strong&gt;     &lt;br&gt;
 VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在训练早期阶段表现更稳定，且对超参数（如学习率和动量）不敏感，相比之下，14×14的卷积层在初期可能不稳定)提取特征生成tokens，并添加位置嵌入以保留空间信息 这一步确保模型能稳定处理图像。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;位置嵌入:&lt;/strong&gt;                        &lt;br&gt;
 在tokens上添加位置嵌入 以保留图像的空间关系。这一步对于保持transformer对空间信息的感知至关重要。&lt;/p&gt;
-&lt;h4 id=&#34;二-transformer架构&#34;&gt;(二) Transformer架构
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;交替注意力机制&lt;/strong&gt;：    &lt;br&gt;
+&lt;h3 id=&#34;二-transformer架构&#34;&gt;(二) Transformer架构
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;交替注意力机制&lt;/strong&gt;：    &lt;br&gt;
 模型采用24层的transformer，使用交替注意力机制，交替处理帧内和全局信息。每个注意力层有1024维特征和16个头，类似于DINOv2的ViT-L配置。&lt;/p&gt;
 &lt;p&gt;注意力机制交替在帧内（frame-wise）和全局（global）之间工作：      &lt;br&gt;
 &lt;strong&gt;帧内注意力：&lt;/strong&gt; 关注单个图像帧内的局部细节，适合捕捉细粒度的特征。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;全局注意力：&lt;/strong&gt; 跨多个视图理解全局场景，适合处理多视图一致性。&lt;/p&gt;
-&lt;h4 id=&#34;三-特征提取与上采样&#34;&gt;(三) 特征提取与上采样
-&lt;/h4&gt;&lt;p&gt;从特定层(4、11、17和23)提取tokens，通过DPT进行上采样，生成如深度图的高分辨率输出。这一步支持3D属性的精确预测。&lt;/p&gt;
-&lt;h4 id=&#34;四-训练数据增强&#34;&gt;(四) 训练数据增强
-&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;图像增强技术：&lt;/strong&gt;                  &lt;br&gt;
+&lt;h3 id=&#34;三-特征提取与上采样&#34;&gt;(三) 特征提取与上采样
+&lt;/h3&gt;&lt;p&gt;从特定层(4、11、17和23)提取tokens，通过DPT进行上采样，生成如深度图的高分辨率输出。这一步支持3D属性的精确预测。&lt;/p&gt;
+&lt;h3 id=&#34;四-训练数据增强&#34;&gt;(四) 训练数据增强
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;图像增强技术：&lt;/strong&gt;                  &lt;br&gt;
 在训练过程中，随机应用以下增强，以提高模型对各种光照和噪声条件的鲁棒性：&lt;/p&gt;
 &lt;p&gt;颜色抖动（Color Jittering）：调整图像的亮度、对比度、饱和度和色调，模拟不同光照条件。&lt;/p&gt;
 &lt;p&gt;高斯模糊（Gaussian Blur）：应用模糊效果，模拟真实世界中的成像模糊。&lt;/p&gt;
@@ -67,8 +67,8 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 &lt;p&gt;&lt;strong&gt;图像尺寸调整：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;图像、深度图和点图被等比例调整，使最大维度为518像素。&lt;/p&gt;
 &lt;p&gt;较短的维度被裁剪到168~518像素之间，且必须是14像素的倍数，以匹配patchification的patch大小。这一步确保了输入数据的统一性和兼容性。&lt;/p&gt;
-&lt;h4 id=&#34;五-总结&#34;&gt;(五) 总结
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p2.png&#34;
+&lt;h3 id=&#34;五-总结&#34;&gt;(五) 总结
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p2.png&#34;
 	width=&#34;1291&#34;
 	height=&#34;448&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p2_hu_ae0a6be6c3c1cd48.png 480w, https://Cyrus-hao.github.io/p/week9/p2_hu_31d231c88f3d25ed.png 1024w&#34;
@@ -82,8 +82,8 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis=&#34;691px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h4 id=&#34;pointmap-branch-和-camera-branch&#34;&gt;Pointmap Branch 和 Camera Branch
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p4.png&#34;
+&lt;h3 id=&#34;pointmap-branch-和-camera-branch&#34;&gt;Pointmap Branch 和 Camera Branch
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p4.png&#34;
 	width=&#34;1308&#34;
 	height=&#34;922&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p4_hu_747d2ce27f65867.png 480w, https://Cyrus-hao.github.io/p/week9/p4_hu_e074fa679ab70c15.png 1024w&#34;
@@ -97,8 +97,8 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis=&#34;340px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h4 id=&#34;camera-branch&#34;&gt;Camera Branch
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p5.png&#34;
+&lt;h3 id=&#34;camera-branch&#34;&gt;Camera Branch
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p5.png&#34;
 	width=&#34;2479&#34;
 	height=&#34;1485&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p5_hu_a9f202e999261a5d.png 480w, https://Cyrus-hao.github.io/p/week9/p5_hu_e9857fc9977a3e30.png 1024w&#34;
@@ -112,8 +112,8 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis=&#34;400px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h4 id=&#34;pointmap-branch&#34;&gt;Pointmap Branch
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p6.png&#34;
+&lt;h3 id=&#34;pointmap-branch&#34;&gt;Pointmap Branch
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p6.png&#34;
 	width=&#34;2479&#34;
 	height=&#34;1485&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p6_hu_4ee3df471952043a.png 480w, https://Cyrus-hao.github.io/p/week9/p6_hu_43b68b685c11255d.png 1024w&#34;
@@ -127,8 +127,8 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis=&#34;400px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h4 id=&#34;code&#34;&gt;Code
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p9.png&#34;
+&lt;h3 id=&#34;code&#34;&gt;Code
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week9/p9.png&#34;
 	width=&#34;661&#34;
 	height=&#34;610&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week9/p9_hu_30e5f7b0ee10a0fa.png 480w, https://Cyrus-hao.github.io/p/week9/p9_hu_d96d78d27a9f3815.png 1024w&#34;
@@ -142,8 +142,8 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 		data-flex-basis=&#34;260px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h5 id=&#34;代码文件初步评估&#34;&gt;代码文件初步评估
-&lt;/h5&gt;&lt;ol&gt;
+&lt;h4 id=&#34;代码文件初步评估&#34;&gt;代码文件初步评估
+&lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;demo_gradio.py&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;&lt;/p&gt;
@@ -309,9 +309,10 @@ VGGT首先将输入图像分成小块，使用DINOv2(选择DINOv2是因为其在
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h5 id=&#34;demo_gradiopy&#34;&gt;demo_gradio.py
-&lt;/h5&gt;&lt;h6 id=&#34;1-模型加载与推理run_model-函数&#34;&gt;1. 模型加载与推理（run_model 函数）
-&lt;/h6&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;                     &lt;br&gt;
+&lt;h4 id=&#34;代码文件详细解析&#34;&gt;代码文件详细解析
+&lt;/h4&gt;&lt;h4 id=&#34;demo_gradiopy&#34;&gt;demo_gradio.py
+&lt;/h4&gt;&lt;h5 id=&#34;1-模型加载与推理run_model-函数&#34;&gt;1. 模型加载与推理（run_model 函数）
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;                     &lt;br&gt;
 从指定目录加载图像，运行 VGGT 模型推理，生成 3D 点云和相机参数。                 &lt;br&gt;
 支持 Pointmap Branch（直接预测 3D 点）和 Depthmap + Camera Branch（通过深度图和相机参数生成点云）。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -352,8 +353,8 @@ predictions 字典，包含 depth、 world_points、 world_points_from_depth、 
 &lt;strong&gt;Camera Branch：&lt;/strong&gt;         &lt;br&gt;
 输出 predictions[&amp;ldquo;pose_enc&amp;rdquo;]，通过 pose_encoding_to_extri_intri 转换为 extrinsic（4×4 矩阵）和 intrinsic（3×3 矩阵）。         &lt;br&gt;
 用于相机姿态估计和深度图到点云的转换。&lt;/p&gt;
-&lt;h6 id=&#34;2-文件处理handle_uploads-函数&#34;&gt;2. 文件处理（handle_uploads 函数）
-&lt;/h6&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;                      &lt;br&gt;
+&lt;h5 id=&#34;2-文件处理handle_uploads-函数&#34;&gt;2. 文件处理（handle_uploads 函数）
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;                      &lt;br&gt;
 处理用户上传的视频或图像，创建临时目录（input_images_&lt;timestamp&gt;），存储图像文件。                &lt;br&gt;
 视频会按每秒一帧提取为图像。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -392,8 +393,8 @@ predictions 字典，包含 depth、 world_points、 world_points_from_depth、 
 &lt;strong&gt;图像处理：&lt;/strong&gt; 直接复制上传的图像到临时目录。         &lt;br&gt;
 &lt;strong&gt;输出：&lt;/strong&gt; 临时目录路径（target_dir）和图像路径列表（image_paths）。         &lt;br&gt;
 &lt;strong&gt;作用：&lt;/strong&gt; 为 run_model 提供输入图像目录，确保上传数据格式统一。&lt;/p&gt;
-&lt;h6 id=&#34;3-界面更新update_gallery_on_upload-函数&#34;&gt;3. 界面更新（update_gallery_on_upload 函数）
-&lt;/h6&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;             &lt;br&gt;
+&lt;h5 id=&#34;3-界面更新update_gallery_on_upload-函数&#34;&gt;3. 界面更新（update_gallery_on_upload 函数）
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;             &lt;br&gt;
 在用户上传视频或图像时，调用 handle_uploads 处理文件，并更新画廊显示上传的图像。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -411,8 +412,8 @@ predictions 字典，包含 depth、 world_points、 world_points_from_depth、 
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;strong&gt;逻辑:&lt;/strong&gt; 检查是否有上传内容，若无则返回空值；否则处理文件并返回目录、图像路径和提示信息。             &lt;br&gt;
 &lt;strong&gt;输出:&lt;/strong&gt; 更新 Gradio 画廊（image_gallery）和日志（log_output）。&lt;/p&gt;
-&lt;h6 id=&#34;4-3d-重建gradio_demo-函数&#34;&gt;4. 3D 重建（gradio_demo 函数）
-&lt;/h6&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;                        &lt;br&gt;
+&lt;h5 id=&#34;4-3d-重建gradio_demo-函数&#34;&gt;4. 3D 重建（gradio_demo 函数）
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;功能：&lt;/strong&gt;                        &lt;br&gt;
 调用 run_model 进行推理，生成 3D 点云和相机参数。        &lt;br&gt;
 使用 predictions_to_glb 将预测结果转换为 GLB 文件。            &lt;br&gt;
 支持用户调整参数（如置信度阈值、帧过滤、天空分割）。&lt;/p&gt;
@@ -464,13 +465,48 @@ predictions_to_glb 根据 prediction_mode 选择使用 world_points（Pointmap B
 提供 extrinsic 和 intrinsic，用于：           &lt;br&gt;
 Depthmap 模式下生成 world_points_from_depth。             &lt;br&gt;
 在 GLB 中可视化相机位置（show_cam=True）。&lt;/p&gt;
-&lt;h6 id=&#34;5-辅助功能&#34;&gt;5. 辅助功能
-&lt;/h6&gt;&lt;p&gt;&lt;strong&gt;clear_fields&lt;/strong&gt;：清除 3D 查看器、临时目录和画廊，恢复初始状态。              &lt;br&gt;
+&lt;h5 id=&#34;5-辅助功能&#34;&gt;5. 辅助功能
+&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;clear_fields&lt;/strong&gt;：清除 3D 查看器、临时目录和画廊，恢复初始状态。              &lt;br&gt;
 &lt;strong&gt;update_log&lt;/strong&gt;：显示“正在加载和重建”提示。             &lt;br&gt;
 &lt;strong&gt;update_visualization&lt;/strong&gt;：               &lt;br&gt;
 当用户调整参数（如 conf_thres、 frame_filter、 prediction_mode）时，加载保存的 .npz 文件，重新生成 GLB 文件。           &lt;br&gt;
 避免重复运行推理，提高交互效率。               &lt;br&gt;
 如果是示例数据（is_example=&amp;ldquo;True&amp;rdquo;），提示用户先点击“Reconstruct”。&lt;/p&gt;
+&lt;h1 id=&#34;427&#34;&gt;4.27
+&lt;/h1&gt;&lt;h2 id=&#34;nerf&#34;&gt;NeRF
+&lt;/h2&gt;&lt;p&gt;bilbil &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1CC411V7oq/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=2f50930509c568406539e7a29e43c090&#34;  title=&#34;bilbil&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【较真系列】讲人话-NeRF全解（原理+代码+公式）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CSDN &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_45752541/article/details/130072505?ops_request_misc=%257B%2522request%255Fid%2522%253A%25226cb656f255cd45331db9dc80293f361e%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=6cb656f255cd45331db9dc80293f361e&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-130072505-null-null.142%5ev102%5epc_search_result_base2&amp;amp;utm_term=nerf&amp;amp;spm=1018.2226.3001.4187&#34;  title=&#34;CSDN&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【三维重建】NeRF原理+代码讲解&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;核心知识要点&#34;&gt;核心知识要点
+&lt;/h2&gt;&lt;p&gt;Neural Radiance Fields (NeRF) 是一种通过神经网络从一组 2D 图像生成 3D 场景新视角的技术。它利用多层感知机 (MLP) 建模场景的辐射场，广泛用于 3D 重建和视图合成。以下是 NeRF 的核心知识要点，涵盖其表示、建模、渲染和训练过程。&lt;/p&gt;
+&lt;h3 id=&#34;1-场景表示与位置编码&#34;&gt;1. 场景表示与位置编码
+&lt;/h3&gt;&lt;p&gt;NeRF 将 3D 场景表示为一个连续的辐射场，通过 MLP 将输入的 3D 坐标 (x, y, z) 和视角方向 (θ, φ) 映射到颜色值 (r, g, b) 和体视密度 σ。体视密度描述了空间点的不透明度，颜色则依赖于位置和视角。&lt;/p&gt;
+&lt;p&gt;为了捕捉高频细节，NeRF 对输入坐标和方向进行位置编码。这种编码通过正弦和余弦函数将低维输入映射到高维空间。坐标通常使用 10 个频率级别，视角方向使用 4 个频率级别，从而增强 MLP 对复杂纹理和几何的建模能力。&lt;/p&gt;
+&lt;h3 id=&#34;2-体视渲染&#34;&gt;2. 体视渲染
+&lt;/h3&gt;&lt;p&gt;NeRF 通过体视渲染生成 2D 图像。渲染过程沿相机光线采样多个点，计算每个点的密度和颜色，并通过积分生成像素颜色。透射率用于模拟光线穿过场景时的衰减，离散采样则将连续积分近似为加权和。这种方法能够精确模拟光线与场景的交互，生成逼真的视图。&lt;/p&gt;
+&lt;h3 id=&#34;3-网络结构与训练&#34;&gt;3. 网络结构与训练
+&lt;/h3&gt;&lt;p&gt;NeRF 的核心是一个 8 层全连接 MLP，每层 256 个神经元，使用 ReLU 激活函数。其工作流程如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入经过位置编码的 3D 坐标，MLP 输出体视密度和中间特征向量。&lt;/li&gt;
+&lt;li&gt;特征向量结合编码后的视角方向，输出最终的颜色值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;训练时，NeRF 使用一组 2D 图像及其相机位姿作为输入。通过光线采样（每条光线采样多个点），计算渲染图像与真实图像的均方误差 (MSE) 作为损失函数。Adam 优化器用于更新 MLP 参数，逐步优化模型。&lt;/p&gt;
+&lt;h3 id=&#34;4-分层采样优化&#34;&gt;4. 分层采样优化
+&lt;/h3&gt;&lt;p&gt;为了提高渲染效率，NeRF 采用分层采样策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;粗网络&lt;/strong&gt;：在光线上均匀采样，预测初步的密度权重。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;细网络&lt;/strong&gt;：根据粗网络权重聚焦于高密度区域，优化采样点分布。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;粗网络和细网络的渲染结果均与真实图像比较，联合优化确保高质量的视图合成。这种分层方法有效减少计算量，同时保留细节。&lt;/p&gt;
+&lt;h1 id=&#34;周总结&#34;&gt;周总结
+&lt;/h1&gt;&lt;p&gt;效率较低&lt;br&gt;
+大多时间浪费在调整学习方向上 &lt;br&gt;
+下周教学评估 &lt;br&gt;
+五一前尽量完成对3DGS大致的熟悉&lt;br&gt;
+论文还是读的太少啦 加油加油 尽量在五月中旬前简历能凑够三个科研项目&lt;/p&gt;
 </description>
         </item>
         <item>
