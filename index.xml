@@ -205,6 +205,89 @@ bilbil &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Fe
 	
 &gt;&lt;br&gt;
 希望明日早起高效些 简历还缺1项目 这两天尽量在数模完成的同时能大部分构思出 下周结束前一定要完成简历le 加油&lt;/p&gt;
+&lt;h1 id=&#34;54&#34;&gt;5.4
+&lt;/h1&gt;&lt;p&gt;假期倒数啦 找到篇较好的知乎贴DleX 跟着经验贴完成入门工作似乎也是优解&lt;/p&gt;
+&lt;h2 id=&#34;1速通3dgs原理&#34;&gt;1.速通3DGS原理
+&lt;/h2&gt;&lt;p&gt;Instant-NGP的速度达到Mip-Nerf360的渲染质量&lt;/p&gt;
+&lt;h3 id=&#34;11-sfm初始化稀疏点云&#34;&gt;1.1 sfm初始化稀疏点云
+&lt;/h3&gt;&lt;p&gt;通过colmap创建初始化点云&lt;/p&gt;
+&lt;h3 id=&#34;12-3d高斯椭球集的创建&#34;&gt;1.2 3D高斯椭球集的创建
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;位置信息&lt;/strong&gt;：点云信息初始化(x,y,z) 高斯椭球中心点(均值)                                            &lt;br&gt;
+&lt;strong&gt;形状信息&lt;/strong&gt;：高斯椭球的协方差矩阵 Y方向压缩再绕旋转原点一定角度                                 &lt;br&gt;
+&lt;strong&gt;颜色信息&lt;/strong&gt;：点云颜色(r,g,b)&amp;ndash;用球谐函数来表示 使得点云在不同角度呈现不同颜色                              &lt;br&gt;
+&lt;strong&gt;不透明度信息&lt;/strong&gt;：点云不透明度                  &lt;br&gt;
+&lt;strong&gt;球谐函数&lt;/strong&gt;：与仰角和方位角有关 与半径无关&lt;/p&gt;
+&lt;h3 id=&#34;13-计算机图形学投影矩阵&#34;&gt;1.3 计算机图形学投影矩阵
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week10/11.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1599&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week10/11_hu_82eca5e855d696a8.png 480w, https://Cyrus-hao.github.io/p/week10/11_hu_2f0dba81861b974f.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;计算机图形学投影矩阵&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;14-渲染公式&#34;&gt;1.4 渲染公式
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week10/12.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1599&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week10/12_hu_61e0164e531cdc7b.png 480w, https://Cyrus-hao.github.io/p/week10/12_hu_6c8fca8d2eb05d39.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;渲染公式&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;                      &lt;br&gt;
+&lt;strong&gt;权重值*不透明度*颜色值&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;15-loss定义&#34;&gt;1.5 loss定义
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week10/13.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1599&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week10/13_hu_a1f3252796f44898.png 480w, https://Cyrus-hao.github.io/p/week10/13_hu_2d1378a83d86fe2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;渲染公式&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;16-基于梯度自适应改变点云的分布方式&#34;&gt;1.6 基于梯度自适应改变点云的分布方式
+&lt;/h3&gt;&lt;p&gt;pruning离相机近的点和不透明度低于设置的阈值的点 &lt;br&gt;
+&lt;strong&gt;过度重构和欠采样&lt;/strong&gt;   &lt;br&gt;
+方差很小 &amp;ndash; 克隆高斯来适应  &lt;br&gt;
+方差很大 &amp;ndash; 分割成两个高斯&lt;/p&gt;
+&lt;h2 id=&#34;2论文讲解用点云结合3d高斯构建辐射场成为快速训练实时渲染的新sota&#34;&gt;2.【论文讲解】用点云结合3D高斯构建辐射场，成为快速训练、实时渲染的新SOTA！
+&lt;/h2&gt;&lt;p&gt;bilbil &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1uV4y1Y7cA/?spm_id_from=333.788.top_right_bar_window_default_collection.content.click&amp;amp;vd_source=2f50930509c568406539e7a29e43c090&#34;  title=&#34;bilbil&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【论文讲解】用点云结合3D高斯构建辐射场，成为快速训练、实时渲染的新SOTA！&lt;/a&gt;        &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week10/14.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1599&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week10/14_hu_e5b94d90d580ccb7.png 480w, https://Cyrus-hao.github.io/p/week10/14_hu_16970f44c9dc353.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;               &lt;br&gt;
+&lt;strong&gt;总结&lt;/strong&gt;：从初始sfm点云出发 以每个点为中心生成3D高斯 用相机参数把点投影到图像平面上(splatting) 从splatting的痕迹中进行tile-based的光栅化得到渲染图象 将渲染图像和
+GT图像求loss反向传播 自适应的密度控制模块根据传递到点上的梯度来决定是否需要对3D高斯做分割或者克隆 梯度也会传递到3D高斯里来更新其中储存的位置 协方差矩阵 不透明度等
+参数               &lt;br&gt;
+&lt;strong&gt;核心&lt;/strong&gt;:构建以协方差矩阵为主导的3D高斯点云 围绕3D高斯点云进行渲染和优化&lt;/p&gt;
 </description>
         </item>
         <item>

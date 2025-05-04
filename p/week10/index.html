@@ -365,6 +365,20 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
     <li><a href="#理论"><strong>理论</strong></a></li>
     <li><a href="#实践"><strong>实践</strong></a></li>
   </ol>
+
+  <ol>
+    <li><a href="#1速通3dgs原理">1.速通3DGS原理</a>
+      <ol>
+        <li><a href="#11-sfm初始化稀疏点云">1.1 sfm初始化稀疏点云</a></li>
+        <li><a href="#12-3d高斯椭球集的创建">1.2 3D高斯椭球集的创建</a></li>
+        <li><a href="#13-计算机图形学投影矩阵">1.3 计算机图形学投影矩阵</a></li>
+        <li><a href="#14-渲染公式">1.4 渲染公式</a></li>
+        <li><a href="#15-loss定义">1.5 loss定义</a></li>
+        <li><a href="#16-基于梯度自适应改变点云的分布方式">1.6 基于梯度自适应改变点云的分布方式</a></li>
+      </ol>
+    </li>
+    <li><a href="#2论文讲解用点云结合3d高斯构建辐射场成为快速训练实时渲染的新sota">2.【论文讲解】用点云结合3D高斯构建辐射场，成为快速训练、实时渲染的新SOTA！</a></li>
+  </ol>
 </nav>
         </div>
     </section>
@@ -625,6 +639,89 @@ bilbil <a class="link" href="https://www.bilibili.com/video/BV1Fe411o7dU/?spm_id
 	
 ><br>
 希望明日早起高效些 简历还缺1项目 这两天尽量在数模完成的同时能大部分构思出 下周结束前一定要完成简历le 加油</p>
+<h1 id="54">5.4
+</h1><p>假期倒数啦 找到篇较好的知乎贴DleX 跟着经验贴完成入门工作似乎也是优解</p>
+<h2 id="1速通3dgs原理">1.速通3DGS原理
+</h2><p>Instant-NGP的速度达到Mip-Nerf360的渲染质量</p>
+<h3 id="11-sfm初始化稀疏点云">1.1 sfm初始化稀疏点云
+</h3><p>通过colmap创建初始化点云</p>
+<h3 id="12-3d高斯椭球集的创建">1.2 3D高斯椭球集的创建
+</h3><p><strong>位置信息</strong>：点云信息初始化(x,y,z) 高斯椭球中心点(均值)                                            <br>
+<strong>形状信息</strong>：高斯椭球的协方差矩阵 Y方向压缩再绕旋转原点一定角度                                 <br>
+<strong>颜色信息</strong>：点云颜色(r,g,b)&ndash;用球谐函数来表示 使得点云在不同角度呈现不同颜色                              <br>
+<strong>不透明度信息</strong>：点云不透明度                  <br>
+<strong>球谐函数</strong>：与仰角和方位角有关 与半径无关</p>
+<h3 id="13-计算机图形学投影矩阵">1.3 计算机图形学投影矩阵
+</h3><p><img src="/p/week10/11.png"
+	width="2559"
+	height="1599"
+	srcset="/p/week10/11_hu_82eca5e855d696a8.png 480w, /p/week10/11_hu_2f0dba81861b974f.png 1024w"
+	loading="lazy"
+	
+		alt="计算机图形学投影矩阵"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+></p>
+<h3 id="14-渲染公式">1.4 渲染公式
+</h3><p><img src="/p/week10/12.png"
+	width="2559"
+	height="1599"
+	srcset="/p/week10/12_hu_61e0164e531cdc7b.png 480w, /p/week10/12_hu_6c8fca8d2eb05d39.png 1024w"
+	loading="lazy"
+	
+		alt="渲染公式"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+>                      <br>
+<strong>权重值*不透明度*颜色值</strong></p>
+<h3 id="15-loss定义">1.5 loss定义
+</h3><p><img src="/p/week10/13.png"
+	width="2559"
+	height="1599"
+	srcset="/p/week10/13_hu_a1f3252796f44898.png 480w, /p/week10/13_hu_2d1378a83d86fe2.png 1024w"
+	loading="lazy"
+	
+		alt="渲染公式"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+></p>
+<h3 id="16-基于梯度自适应改变点云的分布方式">1.6 基于梯度自适应改变点云的分布方式
+</h3><p>pruning离相机近的点和不透明度低于设置的阈值的点 <br>
+<strong>过度重构和欠采样</strong>   <br>
+方差很小 &ndash; 克隆高斯来适应  <br>
+方差很大 &ndash; 分割成两个高斯</p>
+<h2 id="2论文讲解用点云结合3d高斯构建辐射场成为快速训练实时渲染的新sota">2.【论文讲解】用点云结合3D高斯构建辐射场，成为快速训练、实时渲染的新SOTA！
+</h2><p>bilbil <a class="link" href="https://www.bilibili.com/video/BV1uV4y1Y7cA/?spm_id_from=333.788.top_right_bar_window_default_collection.content.click&amp;vd_source=2f50930509c568406539e7a29e43c090"  title="bilbil"
+     target="_blank" rel="noopener"
+    >【论文讲解】用点云结合3D高斯构建辐射场，成为快速训练、实时渲染的新SOTA！</a>        <br>
+<img src="/p/week10/14.png"
+	width="2559"
+	height="1599"
+	srcset="/p/week10/14_hu_e5b94d90d580ccb7.png 480w, /p/week10/14_hu_16970f44c9dc353.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+>               <br>
+<strong>总结</strong>：从初始sfm点云出发 以每个点为中心生成3D高斯 用相机参数把点投影到图像平面上(splatting) 从splatting的痕迹中进行tile-based的光栅化得到渲染图象 将渲染图像和
+GT图像求loss反向传播 自适应的密度控制模块根据传递到点上的梯度来决定是否需要对3D高斯做分割或者克隆 梯度也会传递到3D高斯里来更新其中储存的位置 协方差矩阵 不透明度等
+参数               <br>
+<strong>核心</strong>:构建以协方差矩阵为主导的3D高斯点云 围绕3D高斯点云进行渲染和优化</p>
 
 </section>
 
