@@ -283,7 +283,21 @@ bilbil &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Fe
 		data-flex-grow=&#34;160&#34;
 		data-flex-basis=&#34;384px&#34;
 	
-&gt;               &lt;br&gt;
+&gt;&lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week10/15.png&#34;
+	width=&#34;1471&#34;
+	height=&#34;414&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week10/15_hu_2b610e63f8d3b66a.png 480w, https://Cyrus-hao.github.io/p/week10/15_hu_8fd05c432a3d412b.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;pipline&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;355&#34;
+		data-flex-basis=&#34;852px&#34;
+	
+&gt;              &lt;br&gt;
 &lt;strong&gt;总结&lt;/strong&gt;：从初始sfm点云出发 以每个点为中心生成3D高斯 用相机参数把点投影到图像平面上(splatting) 从splatting的痕迹中进行tile-based的光栅化得到渲染图象 将渲染图像和
 GT图像求loss反向传播 自适应的密度控制模块根据传递到点上的梯度来决定是否需要对3D高斯做分割或者克隆 梯度也会传递到3D高斯里来更新其中储存的位置 协方差矩阵 不透明度等
 参数               &lt;br&gt;
