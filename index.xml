@@ -29,14 +29,18 @@
 		data-flex-basis=&#34;513px&#34;
 	
 &gt;       &lt;br&gt;
-&lt;img src=&#34;https://Cyrus-hao.github.io/3.png&#34;
-	
-	
-	
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/3.png&#34;
+	width=&#34;1179&#34;
+	height=&#34;1651&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/3_hu_6702629c186bc087.png 480w, https://Cyrus-hao.github.io/p/week11/3_hu_f895cb478afa5147.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;简历&#34;
 	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;71&#34;
+		data-flex-basis=&#34;171px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h1 id=&#34;56&#34;&gt;5.6
