@@ -44,11 +44,16 @@
 	
 &gt;&lt;/p&gt;
 &lt;h1 id=&#34;56&#34;&gt;5.6
-&lt;/h1&gt;&lt;p&gt;希望cad导能把鼠鼠收了吧🥹🥹&lt;br&gt;
+&lt;/h1&gt;&lt;p&gt;希望cad导能把鼠鼠收了吧🥹🥹   &lt;br&gt;
 早上体育课老师不在 爽空出一节课时间&lt;/p&gt;
 &lt;h2 id=&#34;lecture-3&#34;&gt;lecture 3
-&lt;/h2&gt;&lt;p&gt;point (x,y,1)  vector (x,y,0)      &lt;br&gt;
-&lt;strong&gt;2D transformations&lt;/strong&gt;            &lt;br&gt;
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;2D: point (x,y,1)  vector (x,y,0)&lt;/li&gt;
+&lt;li&gt;3D: point (x,y,z,1)  vector (x,y,z,0)&lt;/li&gt;
+&lt;li&gt;矩阵*逆矩阵 = 单位矩阵&lt;/li&gt;
+&lt;li&gt;矩阵放向量左边 相当于左边的矩阵应用到右边的向量&lt;/li&gt;
+&lt;li&gt;矩阵变换从右到左 先进行线性变换再平移                 &lt;br&gt;
+&lt;strong&gt;2D transformations&lt;/strong&gt;              &lt;br&gt;
 &lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/4.png&#34;
 	width=&#34;2559&#34;
 	height=&#34;1599&#34;
@@ -62,7 +67,11 @@
 		data-flex-grow=&#34;160&#34;
 		data-flex-basis=&#34;384px&#34;
 	
-&gt;&lt;/p&gt;
+&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;57&#34;&gt;5.7
+&lt;/h1&gt;&lt;p&gt;games101目前进度在lecture6 状态有些低迷 满天柳絮啊 确实是对鼻炎患者的谋杀 今天初恋生日 哈哈已经托人祝福她了   &lt;br&gt;
+英语周六周日再做吧 这两天打完数模 得多放些时间在nerf和3dgs一些前沿论文上了 论文还是读的太少了 games101 暂时先放放&lt;/p&gt;
 </description>
         </item>
         <item>
