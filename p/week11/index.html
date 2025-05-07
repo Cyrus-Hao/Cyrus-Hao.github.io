@@ -327,7 +327,42 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#lecture-3">lecture 3</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#plenoxels">Plenoxels</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -445,8 +480,32 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
 ></li>
 </ol>
 <h1 id="57">5.7
-</h1><p>games101目前进度在lecture6 状态有些低迷 满天柳絮啊 确实是对鼻炎患者的谋杀 今天初恋生日 哈哈已经托人祝福她了   <br>
+</h1><p>games101目前进度在lecture6 状态有些低迷 满天柳絮啊 确实是对鼻炎患者的谋杀 今天初恋生日 哈哈已经托人祝福她了    <br>
 英语周六周日再做吧 这两天打完数模 得多放些时间在nerf和3dgs一些前沿论文上了 论文还是读的太少了 games101 暂时先放放</p>
+<h2 id="plenoxels">Plenoxels
+</h2><p>bilbil <a class="link" href="https://www.bilibili.com/video/BV1qx4y1u7By?spm_id_from=333.788.videopod.sections&amp;vd_source=2f50930509c568406539e7a29e43c090"  title="【论文讲解】Plenoxels：没有神经的辐射场，把NeRF提速两个数量级(CVPR 2022)"
+     target="_blank" rel="noopener"
+    >【论文讲解】Plenoxels：没有神经的辐射场，把NeRF提速两个数量级(CVPR 2022)</a></p>
+<ol>
+<li>本文提出了Plenoxels，一个用于照片级视角合成的系统。Plenoxels将场景表达为一个稀疏的球谐函数(Spherical Harmonics)表示的体素网格     <br>
+这种表达可以不使用任何神经网络，采用包含内外参的图像采用梯度方法和正则化进行优化。</li>
+<li>NeRF的关键点并不是神经网络 而是可微体渲染</li>
+<li></li>
+</ol>
+<p><img src="/p/week11/5.png"
+	width="2559"
+	height="1599"
+	srcset="/p/week11/5_hu_529b6dfa6b6bb8e1.png 480w, /p/week11/5_hu_72575aac802cface.png 1024w"
+	loading="lazy"
+	
+		alt="PlenOctrees"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+></p>
 
 </section>
 

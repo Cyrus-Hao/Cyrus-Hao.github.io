@@ -70,8 +70,32 @@
 &gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h1 id=&#34;57&#34;&gt;5.7
-&lt;/h1&gt;&lt;p&gt;games101目前进度在lecture6 状态有些低迷 满天柳絮啊 确实是对鼻炎患者的谋杀 今天初恋生日 哈哈已经托人祝福她了   &lt;br&gt;
+&lt;/h1&gt;&lt;p&gt;games101目前进度在lecture6 状态有些低迷 满天柳絮啊 确实是对鼻炎患者的谋杀 今天初恋生日 哈哈已经托人祝福她了    &lt;br&gt;
 英语周六周日再做吧 这两天打完数模 得多放些时间在nerf和3dgs一些前沿论文上了 论文还是读的太少了 games101 暂时先放放&lt;/p&gt;
+&lt;h2 id=&#34;plenoxels&#34;&gt;Plenoxels
+&lt;/h2&gt;&lt;p&gt;bilbil &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1qx4y1u7By?spm_id_from=333.788.videopod.sections&amp;amp;vd_source=2f50930509c568406539e7a29e43c090&#34;  title=&#34;【论文讲解】Plenoxels：没有神经的辐射场，把NeRF提速两个数量级(CVPR 2022)&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【论文讲解】Plenoxels：没有神经的辐射场，把NeRF提速两个数量级(CVPR 2022)&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;本文提出了Plenoxels，一个用于照片级视角合成的系统。Plenoxels将场景表达为一个稀疏的球谐函数(Spherical Harmonics)表示的体素网格     &lt;br&gt;
+这种表达可以不使用任何神经网络，采用包含内外参的图像采用梯度方法和正则化进行优化。&lt;/li&gt;
+&lt;li&gt;NeRF的关键点并不是神经网络 而是可微体渲染&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/5.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1599&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/5_hu_529b6dfa6b6bb8e1.png 480w, https://Cyrus-hao.github.io/p/week11/5_hu_72575aac802cface.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PlenOctrees&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
