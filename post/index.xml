@@ -77,12 +77,11 @@
      target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;【论文讲解】Plenoxels：没有神经的辐射场，把NeRF提速两个数量级(CVPR 2022)&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;本文提出了Plenoxels，一个用于照片级视角合成的系统。Plenoxels将场景表达为一个稀疏的球谐函数(Spherical Harmonics)表示的体素网格     &lt;br&gt;
+&lt;li&gt;本文提出了Plenoxels，一个用于照片级视角合成的系统。Plenoxels将场景表达为一个稀疏的球谐函数(Spherical Harmonics)表示的体素网格      &lt;br&gt;
 这种表达可以不使用任何神经网络，采用包含内外参的图像采用梯度方法和正则化进行优化。&lt;/li&gt;
 &lt;li&gt;NeRF的关键点并不是神经网络 而是可微体渲染&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/5.png&#34;
+&lt;li&gt;Plenoxels的前作基础是PlenOctrees        &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/5.png&#34;
 	width=&#34;2559&#34;
 	height=&#34;1599&#34;
 	srcset=&#34;https://Cyrus-hao.github.io/p/week11/5_hu_529b6dfa6b6bb8e1.png 480w, https://Cyrus-hao.github.io/p/week11/5_hu_72575aac802cface.png 1024w&#34;
@@ -94,6 +93,353 @@
 		class=&#34;gallery-image&#34; 
 		data-flex-grow=&#34;160&#34;
 		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;把NeRF原作中用MLP预测体密度和RGB值改成预测球谐函数的参数向量k 用k构建这个空间位置处的一系列球谐函数 求和获得color  &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/6.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1599&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/6_hu_6931a94be8184055.png 480w, https://Cyrus-hao.github.io/p/week11/6_hu_dfe08308f37ff21.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;pipeline&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;             &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/7.png&#34;
+	width=&#34;2394&#34;
+	height=&#34;847&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/7_hu_be2e0486b48582b5.png 480w, https://Cyrus-hao.github.io/p/week11/7_hu_7e62a8781439538c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;优化&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;282&#34;
+		data-flex-basis=&#34;678px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;RGB三个通道 27个球谐函数(3**3) + 体密度1 = 28个&lt;/li&gt;
+&lt;li&gt;JAXNeRF 用多GPU加速渲染&lt;/li&gt;
+&lt;li&gt;plenoxels用了64个一层层嵌套的球面 为了节约内存 每个球面只用了零阶的球谐函数 和NeRF++一样解决无边界和360度的场景&lt;/li&gt;
+&lt;li&gt;总结
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/8.png&#34;
+	width=&#34;2559&#34;
+	height=&#34;1446&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/8_hu_4847b4d8b81132e6.png 480w, https://Cyrus-hao.github.io/p/week11/8_hu_e0180956328dbcea.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;总结&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;424px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;li&gt;缺陷
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/9.png&#34;
+	width=&#34;1713&#34;
+	height=&#34;733&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/9_hu_8e2c15b2c7eff6cc.png 480w, https://Cyrus-hao.github.io/p/week11/9_hu_cb6cab12a1cd5034.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;缺陷&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;560px&#34;
+	
+&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;58&#34;&gt;5.8
+&lt;/h1&gt;&lt;p&gt;bilbil &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Kr42187yX/?spm_id_from=333.999.0.0&amp;amp;vd_source=2f50930509c568406539e7a29e43c090&#34;  title=&#34;大规模与自动驾驶场景重建 | 3D Gaussian Splatting 相关工作整理【1】&#34;
+     target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;大规模与自动驾驶场景重建 | 3D Gaussian Splatting 相关工作整理【1】&lt;/a&gt;    &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_01.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_01_hu_bd3d437cc8b63e14.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_01_hu_bab023911d4db5d5.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                  &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_02.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_02_hu_853c1148e9a85299.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_02_hu_fa1547fa73388ad1.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                    &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_03.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_03_hu_49b31e39c003394.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_03_hu_f1caf7ef87a40e63.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;             &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_04.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_04_hu_9cdae36e1d303aea.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_04_hu_3fe697b76947f943.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;               &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_05.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_05_hu_38e41a69960882e4.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_05_hu_30fa60a64c141c38.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                  &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_06.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_06_hu_aa1fc95192a9e753.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_06_hu_ea9950aa9e439cf3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;          &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_07.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_07_hu_9e3c96dd3016cff4.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_07_hu_99f714cda4cfd7b1.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_08.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_08_hu_8c2a4c9fdd129b80.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_08_hu_ec1e7f1ef525dd74.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;        &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_09.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_09_hu_3b70b8d61a4cb9.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_09_hu_ad47192e33895dd2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;          &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_10.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_10_hu_55a1e4caa04c91fa.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_10_hu_b5878da4c2fa65b2.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;         &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_11.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_11_hu_6d270eeaa847b6d1.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_11_hu_ee8717cad424ea1c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                   &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_12.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_12_hu_6dfd5b8849007567.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_12_hu_32f0511736f2856c.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                   &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_13.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_13_hu_81c96d68e6ac39bf.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_13_hu_129deb95808a1e61.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;   &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_14.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_14_hu_d1717c8b18788f64.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_14_hu_efbadd69611b5465.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;         &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_15.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_15_hu_616ade75eb3e9464.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_15_hu_4441a07f53cbdc71.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;          &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_16.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_16_hu_51fe1ee2989f369f.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_16_hu_dff7f91d7ecf5fdf.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;              &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_17.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_17_hu_c34c217c013b896d.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_17_hu_81e35bb0dbd69a59.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;         &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_18.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_18_hu_6f777e5d4d586f83.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_18_hu_7827dec1bd65de41.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;                     &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_19.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_19_hu_34d2905bdde14982.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_19_hu_37d1508ad424acf8.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;               &lt;br&gt;
+&lt;img src=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_20.png&#34;
+	width=&#34;7680&#34;
+	height=&#34;4320&#34;
+	srcset=&#34;https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_20_hu_51e44583179280d2.png 480w, https://Cyrus-hao.github.io/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_20_hu_aa8cd0686769d015.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;相关工作&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
 	
 &gt;&lt;/p&gt;
 </description>

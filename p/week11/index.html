@@ -487,12 +487,11 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
      target="_blank" rel="noopener"
     >【论文讲解】Plenoxels：没有神经的辐射场，把NeRF提速两个数量级(CVPR 2022)</a></p>
 <ol>
-<li>本文提出了Plenoxels，一个用于照片级视角合成的系统。Plenoxels将场景表达为一个稀疏的球谐函数(Spherical Harmonics)表示的体素网格     <br>
+<li>本文提出了Plenoxels，一个用于照片级视角合成的系统。Plenoxels将场景表达为一个稀疏的球谐函数(Spherical Harmonics)表示的体素网格      <br>
 这种表达可以不使用任何神经网络，采用包含内外参的图像采用梯度方法和正则化进行优化。</li>
 <li>NeRF的关键点并不是神经网络 而是可微体渲染</li>
-<li></li>
-</ol>
-<p><img src="/p/week11/5.png"
+<li>Plenoxels的前作基础是PlenOctrees        <br>
+<img src="/p/week11/5.png"
 	width="2559"
 	height="1599"
 	srcset="/p/week11/5_hu_529b6dfa6b6bb8e1.png 480w, /p/week11/5_hu_72575aac802cface.png 1024w"
@@ -504,6 +503,353 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
 		class="gallery-image" 
 		data-flex-grow="160"
 		data-flex-basis="384px"
+	
+></li>
+<li>把NeRF原作中用MLP预测体密度和RGB值改成预测球谐函数的参数向量k 用k构建这个空间位置处的一系列球谐函数 求和获得color  <br>
+<img src="/p/week11/6.png"
+	width="2559"
+	height="1599"
+	srcset="/p/week11/6_hu_6931a94be8184055.png 480w, /p/week11/6_hu_dfe08308f37ff21.png 1024w"
+	loading="lazy"
+	
+		alt="pipeline"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="160"
+		data-flex-basis="384px"
+	
+>             <br>
+<img src="/p/week11/7.png"
+	width="2394"
+	height="847"
+	srcset="/p/week11/7_hu_be2e0486b48582b5.png 480w, /p/week11/7_hu_7e62a8781439538c.png 1024w"
+	loading="lazy"
+	
+		alt="优化"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="282"
+		data-flex-basis="678px"
+	
+></li>
+<li>RGB三个通道 27个球谐函数(3**3) + 体密度1 = 28个</li>
+<li>JAXNeRF 用多GPU加速渲染</li>
+<li>plenoxels用了64个一层层嵌套的球面 为了节约内存 每个球面只用了零阶的球谐函数 和NeRF++一样解决无边界和360度的场景</li>
+<li>总结
+<img src="/p/week11/8.png"
+	width="2559"
+	height="1446"
+	srcset="/p/week11/8_hu_4847b4d8b81132e6.png 480w, /p/week11/8_hu_e0180956328dbcea.png 1024w"
+	loading="lazy"
+	
+		alt="总结"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="176"
+		data-flex-basis="424px"
+	
+></li>
+<li>缺陷
+<img src="/p/week11/9.png"
+	width="1713"
+	height="733"
+	srcset="/p/week11/9_hu_8e2c15b2c7eff6cc.png 480w, /p/week11/9_hu_cb6cab12a1cd5034.png 1024w"
+	loading="lazy"
+	
+		alt="缺陷"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="560px"
+	
+></li>
+</ol>
+<h1 id="58">5.8
+</h1><p>bilbil <a class="link" href="https://www.bilibili.com/video/BV1Kr42187yX/?spm_id_from=333.999.0.0&amp;vd_source=2f50930509c568406539e7a29e43c090"  title="大规模与自动驾驶场景重建 | 3D Gaussian Splatting 相关工作整理【1】"
+     target="_blank" rel="noopener"
+    >大规模与自动驾驶场景重建 | 3D Gaussian Splatting 相关工作整理【1】</a>    <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_01.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_01_hu_bd3d437cc8b63e14.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_01_hu_bab023911d4db5d5.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                  <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_02.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_02_hu_853c1148e9a85299.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_02_hu_fa1547fa73388ad1.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                    <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_03.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_03_hu_49b31e39c003394.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_03_hu_f1caf7ef87a40e63.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>             <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_04.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_04_hu_9cdae36e1d303aea.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_04_hu_3fe697b76947f943.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>               <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_05.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_05_hu_38e41a69960882e4.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_05_hu_30fa60a64c141c38.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                  <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_06.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_06_hu_aa1fc95192a9e753.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_06_hu_ea9950aa9e439cf3.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>          <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_07.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_07_hu_9e3c96dd3016cff4.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_07_hu_99f714cda4cfd7b1.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_08.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_08_hu_8c2a4c9fdd129b80.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_08_hu_ec1e7f1ef525dd74.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>        <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_09.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_09_hu_3b70b8d61a4cb9.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_09_hu_ad47192e33895dd2.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>          <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_10.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_10_hu_55a1e4caa04c91fa.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_10_hu_b5878da4c2fa65b2.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>         <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_11.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_11_hu_6d270eeaa847b6d1.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_11_hu_ee8717cad424ea1c.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                   <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_12.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_12_hu_6dfd5b8849007567.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_12_hu_32f0511736f2856c.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                   <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_13.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_13_hu_81c96d68e6ac39bf.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_13_hu_129deb95808a1e61.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>   <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_14.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_14_hu_d1717c8b18788f64.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_14_hu_efbadd69611b5465.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>         <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_15.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_15_hu_616ade75eb3e9464.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_15_hu_4441a07f53cbdc71.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>          <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_16.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_16_hu_51fe1ee2989f369f.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_16_hu_dff7f91d7ecf5fdf.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>              <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_17.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_17_hu_c34c217c013b896d.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_17_hu_81e35bb0dbd69a59.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>         <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_18.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_18_hu_6f777e5d4d586f83.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_18_hu_7827dec1bd65de41.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>                     <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_19.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_19_hu_34d2905bdde14982.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_19_hu_37d1508ad424acf8.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+>               <br>
+<img src="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_20.png"
+	width="7680"
+	height="4320"
+	srcset="/p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_20_hu_51e44583179280d2.png 480w, /p/week11/GS%E6%9C%80%E6%96%B0%E8%BF%9B%E5%B1%951_20_hu_aa8cd0686769d015.png 1024w"
+	loading="lazy"
+	
+		alt="相关工作"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
 	
 ></p>
 
