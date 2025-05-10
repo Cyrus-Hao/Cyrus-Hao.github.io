@@ -7,7 +7,44 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>CyrusHao</copyright>
-        <lastBuildDate>Mon, 05 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Cyrus-hao.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 10 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://Cyrus-hao.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MP-SFM</title>
+        <link>https://Cyrus-hao.github.io/p/mp-sfm/</link>
+        <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://Cyrus-hao.github.io/p/mp-sfm/</guid>
+        <description>&lt;img src="https://Cyrus-hao.github.io/p/mp-sfm/1.png" alt="Featured image of post MP-SFM" /&gt;&lt;h1 id=&#34;510&#34;&gt;5.10
+&lt;/h1&gt;&lt;h2 id=&#34;sfm&#34;&gt;SFM
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;sfm可以通过一组二维图像推算出相机位置/角度以及3D模型&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-工作原理&#34;&gt;1. 工作原理：
+&lt;/h3&gt;&lt;p&gt;通过分析特征点(一般指图像间相同的点)的相对位置关系推算出三维场景，相机位置和角度       &lt;br&gt;
+通俗类比下 我拿着相机从不同角度拍一个点 可以通过几何知识 比较不同照片中该点的位置 算出我每次拍照的位置和角度以及该点的三维坐标&lt;/p&gt;
+&lt;h3 id=&#34;2-详细步骤&#34;&gt;2. 详细步骤
+&lt;/h3&gt;&lt;h4 id=&#34;21-特征提取和匹配找到每张图像中的特征点-并确定哪些点在不同图像中对应同一个现实世界中的点&#34;&gt;2.1 &lt;strong&gt;特征提取和匹配&lt;/strong&gt;:找到每张图像中的特征点 并确定哪些点在不同图像中对应同一个现实世界中的点
+&lt;/h4&gt;&lt;p&gt;(1).找到特征点 可以用算法(SIFT ORB或者深度学习的算法 像superpoint)在每张图像中检测一些显著点(像是边缘点 角点等)         &lt;br&gt;
+(2).特征描述子(这些点的描述信息)可以用来比较两张图像中的点是否相同    &lt;br&gt;
+(3).通过一些匹配算法(SuperGlue或最近邻匹配)可以找到图像中的对应点 类似一个点在两张图像中分别的位置坐标     &lt;br&gt;
+&lt;strong&gt;结果&lt;/strong&gt;:可以得到多张图像中的匹配点对 表示它是同一个3D点在不同视角中的投影&lt;/p&gt;
+&lt;h4 id=&#34;22-估计相机姿态根据匹配点可以计算每张照片的相机位置和朝向相机外参包括旋转矩阵-r-和平移向量-t&#34;&gt;2.2 &lt;strong&gt;估计相机姿态&lt;/strong&gt;:根据匹配点，可以计算每张照片的相机位置和朝向(相机外参，包括旋转矩阵 R 和平移向量 t)
+&lt;/h4&gt;&lt;p&gt;用矩阵分析(8点算法或5点算法)匹配点-&amp;gt;推算出两张图像中的相机姿态(一般从两张图像开始计算它们的相对姿态然后逐步加入更多图像-&amp;gt;增量式sfm)   &lt;br&gt;
+&lt;strong&gt;结果&lt;/strong&gt;:得到每张图像的相机姿态（在哪里拍,朝哪个方向）&lt;/p&gt;
+&lt;h4 id=&#34;23-三维点云重建根据匹配点和相机姿态计算场景中3d点的坐标&#34;&gt;2.3 &lt;strong&gt;三维点云重建&lt;/strong&gt;:根据匹配点和相机姿态，计算场景中3D点的坐标
+&lt;/h4&gt;&lt;p&gt;使用三角测量：已知相机位置和匹配点的像素坐标-&amp;gt;计算这些点在3D空间中的位置      &lt;br&gt;
+比如，照片A和照片B都看到了一个点，通过它们的像素坐标和相机姿态，可以算出这个点在3D空间的(x, y, z)坐标      &lt;br&gt;
+&lt;strong&gt;结果&lt;/strong&gt;：生成一个稀疏点云,表示场景中关键点的3D位置&lt;/p&gt;
+&lt;h4 id=&#34;24-全局优化优化相机姿态和3d点的位置减少误差&#34;&gt;2.4 &lt;strong&gt;全局优化&lt;/strong&gt;:优化相机姿态和3D点的位置,减少误差
+&lt;/h4&gt;&lt;p&gt;(1).特征匹配和初始计算可能有误差(比如匹配点不完全准确)，需要通过优化算法调整所有参数              &lt;br&gt;
+(2).优化目标是最小化重投影误差：即确保3D点投影回每张图像的像素位置与实际观测的像素位置尽可能接近                        &lt;br&gt;
+&lt;strong&gt;结果&lt;/strong&gt;:得到更精确的相机姿态和3D点云&lt;/p&gt;
+&lt;h4 id=&#34;25-扩展与后处理&#34;&gt;2.5 &lt;strong&gt;扩展与后处理&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;(1).扩展：将更多图像加入，重复上述步骤，构建更完整的点云                     &lt;br&gt;
+(2).后处理：         &lt;br&gt;
+稠密重建：基于稀疏点云，进一步生成稠密点云或网格（比如用 MVS，Multi-View Stereo）       &lt;br&gt;
+纹理贴图：将图像的颜色信息映射到 3D 模型上，生成带纹理的模型         &lt;br&gt;
+&lt;strong&gt;结果&lt;/strong&gt;:得到完整的 3D 模型，可能包括点云、网格或带纹理的表面&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Week11</title>
         <link>https://Cyrus-hao.github.io/p/week11/</link>
         <pubDate>Mon, 05 May 2025 00:00:00 +0000</pubDate>

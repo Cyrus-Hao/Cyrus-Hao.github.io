@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head>
-	<meta name="generator" content="Hugo 0.147.2"><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="余生是你，余光也是你">
-<title>CyrusHao</title>
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="5.10 SFM sfm可以通过一组二维图像推算出相机位置/角度以及3D模型\n1. 工作原理： 通过分析特征点(一般指图像间相同的点)的相对位置关系推算出三维场景，相机位置和角度 通俗类比下 我拿着相机从不同角度拍一个点 可以通过几何知识 比较不同照片中该点的位置 算出我每次拍照的位置和角度以及该点的三维坐标\n">
+<title>MP-SFM</title>
 
-<link rel='canonical' href='https://Cyrus-hao.github.io/'>
+<link rel='canonical' href='https://Cyrus-hao.github.io/p/mp-sfm/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="CyrusHao">
-<meta property='og:description' content="余生是你，余光也是你">
-<meta property='og:url' content='https://Cyrus-hao.github.io/'>
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="MP-SFM">
+<meta property='og:description' content="5.10 SFM sfm可以通过一组二维图像推算出相机位置/角度以及3D模型\n1. 工作原理： 通过分析特征点(一般指图像间相同的点)的相对位置关系推算出三维场景，相机位置和角度 通俗类比下 我拿着相机从不同角度拍一个点 可以通过几何知识 比较不同照片中该点的位置 算出我每次拍照的位置和角度以及该点的三维坐标\n">
+<meta property='og:url' content='https://Cyrus-hao.github.io/p/mp-sfm/'>
 <meta property='og:site_name' content='CyrusHao'>
-<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-05-10T00:00:00&#43;00:00 '/>
-<meta name="twitter:title" content="CyrusHao">
-<meta name="twitter:description" content="余生是你，余光也是你"><link rel="alternate" type="application/rss&#43;xml" href="https://Cyrus-hao.github.io/index.xml">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-05-10T00:00:00&#43;00:00'/><meta property='og:image' content='https://Cyrus-hao.github.io/p/mp-sfm/1.png' />
+<meta name="twitter:title" content="MP-SFM">
+<meta name="twitter:description" content="5.10 SFM sfm可以通过一组二维图像推算出相机位置/角度以及3D模型\n1. 工作原理： 通过分析特征点(一般指图像间相同的点)的相对位置关系推算出三维场景，相机位置和角度 通俗类比下 我拿着相机从不同角度拍一个点 可以通过几何知识 比较不同照片中该点的位置 算出我每次拍照的位置和角度以及该点的三维坐标\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://Cyrus-hao.github.io/p/mp-sfm/1.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
-    <body class="">
+    <body class="
+    article-page
+    ">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -200,7 +202,7 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
         
         
         
-        <li  class='current' >
+        <li >
             <a href='/' >
                 
                 
@@ -328,61 +330,10 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
     <aside class="sidebar right-sidebar sticky">
         
             
-                <form action="/search/" class="search-form widget" >
-        <p>
-            <label>搜索</label>
-            <input name="keyword" required placeholder="输入关键词..." />
-        
-            <button title="搜索">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-            </button>
-        </p>
-    </form>
-            
-        
-            
-                <section class="widget archives">
+                
+    <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">归档</h2>
-
-        
-        
-        
-        
-        
-        <div class="widget-archive--list">
-            <div class="archives-year">
-                    <a href="/archives/#2025">
-                        
-                            <span class="year">2025</span>
-                            <span class="count">6</span>
-                        
-                    </a> 
-                </div>
-            
-        </div>
-    </section>
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -392,49 +343,38 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
 
 
 
-    </div>
-    <h2 class="widget-title section-title">分类</h2>
-
-    <div class="tagCloud-tags">
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
         
-    </div>
-</section>
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#sfm">SFM</a>
+      <ol>
+        <li><a href="#1-工作原理">1. 工作原理：</a></li>
+        <li><a href="#2-详细步骤">2. 详细步骤</a>
+          <ol>
+            <li><a href="#21-特征提取和匹配找到每张图像中的特征点-并确定哪些点在不同图像中对应同一个现实世界中的点">2.1 <strong>特征提取和匹配</strong>:找到每张图像中的特征点 并确定哪些点在不同图像中对应同一个现实世界中的点</a></li>
+            <li><a href="#22-估计相机姿态根据匹配点可以计算每张照片的相机位置和朝向相机外参包括旋转矩阵-r-和平移向量-t">2.2 <strong>估计相机姿态</strong>:根据匹配点，可以计算每张照片的相机位置和朝向(相机外参，包括旋转矩阵 R 和平移向量 t)</a></li>
+            <li><a href="#23-三维点云重建根据匹配点和相机姿态计算场景中3d点的坐标">2.3 <strong>三维点云重建</strong>:根据匹配点和相机姿态，计算场景中3D点的坐标</a></li>
+            <li><a href="#24-全局优化优化相机姿态和3d点的位置减少误差">2.4 <strong>全局优化</strong>:优化相机姿态和3D点的位置,减少误差</a></li>
+            <li><a href="#25-扩展与后处理">2.5 <strong>扩展与后处理</strong></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
 
-            
-        
-            
-                <section class="widget tagCloud">
-    <div class="widget-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
-  <circle cx="9" cy="9" r="2" />
-</svg>
-
-
-
-    </div>
-    <h2 class="widget-title section-title">标签云</h2>
-
-    <div class="tagCloud-tags">
-        
-    </div>
-</section>
             
         
     </aside>
 
 
             <main class="main full-width">
-    
-    
-    
-    
-
-    <section class="article-list">
-        
-            
-<article class="has-image">
+    <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
             <a href="/p/mp-sfm/">
@@ -488,139 +428,62 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
 </div>
 
 </header>
-</article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/week11/">
-                <img src="/p/week11/1_hu_ae5ad0dd9255c996.png"
-                        srcset="/p/week11/1_hu_ae5ad0dd9255c996.png 800w, /p/week11/1_hu_11904002904c5ca.png 1600w"
-                        width="800" 
-                        height="522" 
-                        loading="lazy"
-                        alt="Featured image of post Week11" />
-                
-            </a>
-        </div>
+
+    <section class="article-content">
+    
+    
+    <h1 id="510">5.10
+</h1><h2 id="sfm">SFM
+</h2><p><strong>sfm可以通过一组二维图像推算出相机位置/角度以及3D模型</strong></p>
+<h3 id="1-工作原理">1. 工作原理：
+</h3><p>通过分析特征点(一般指图像间相同的点)的相对位置关系推算出三维场景，相机位置和角度       <br>
+通俗类比下 我拿着相机从不同角度拍一个点 可以通过几何知识 比较不同照片中该点的位置 算出我每次拍照的位置和角度以及该点的三维坐标</p>
+<h3 id="2-详细步骤">2. 详细步骤
+</h3><h4 id="21-特征提取和匹配找到每张图像中的特征点-并确定哪些点在不同图像中对应同一个现实世界中的点">2.1 <strong>特征提取和匹配</strong>:找到每张图像中的特征点 并确定哪些点在不同图像中对应同一个现实世界中的点
+</h4><p>(1).找到特征点 可以用算法(SIFT ORB或者深度学习的算法 像superpoint)在每张图像中检测一些显著点(像是边缘点 角点等)         <br>
+(2).特征描述子(这些点的描述信息)可以用来比较两张图像中的点是否相同    <br>
+(3).通过一些匹配算法(SuperGlue或最近邻匹配)可以找到图像中的对应点 类似一个点在两张图像中分别的位置坐标     <br>
+<strong>结果</strong>:可以得到多张图像中的匹配点对 表示它是同一个3D点在不同视角中的投影</p>
+<h4 id="22-估计相机姿态根据匹配点可以计算每张照片的相机位置和朝向相机外参包括旋转矩阵-r-和平移向量-t">2.2 <strong>估计相机姿态</strong>:根据匹配点，可以计算每张照片的相机位置和朝向(相机外参，包括旋转矩阵 R 和平移向量 t)
+</h4><p>用矩阵分析(8点算法或5点算法)匹配点-&gt;推算出两张图像中的相机姿态(一般从两张图像开始计算它们的相对姿态然后逐步加入更多图像-&gt;增量式sfm)   <br>
+<strong>结果</strong>:得到每张图像的相机姿态（在哪里拍,朝哪个方向）</p>
+<h4 id="23-三维点云重建根据匹配点和相机姿态计算场景中3d点的坐标">2.3 <strong>三维点云重建</strong>:根据匹配点和相机姿态，计算场景中3D点的坐标
+</h4><p>使用三角测量：已知相机位置和匹配点的像素坐标-&gt;计算这些点在3D空间中的位置      <br>
+比如，照片A和照片B都看到了一个点，通过它们的像素坐标和相机姿态，可以算出这个点在3D空间的(x, y, z)坐标      <br>
+<strong>结果</strong>：生成一个稀疏点云,表示场景中关键点的3D位置</p>
+<h4 id="24-全局优化优化相机姿态和3d点的位置减少误差">2.4 <strong>全局优化</strong>:优化相机姿态和3D点的位置,减少误差
+</h4><p>(1).特征匹配和初始计算可能有误差(比如匹配点不完全准确)，需要通过优化算法调整所有参数              <br>
+(2).优化目标是最小化重投影误差：即确保3D点投影回每张图像的像素位置与实际观测的像素位置尽可能接近                        <br>
+<strong>结果</strong>:得到更精确的相机姿态和3D点云</p>
+<h4 id="25-扩展与后处理">2.5 <strong>扩展与后处理</strong>
+</h4><p>(1).扩展：将更多图像加入，重复上述步骤，构建更完整的点云                     <br>
+(2).后处理：         <br>
+稠密重建：基于稀疏点云，进一步生成稠密点云或网格（比如用 MVS，Multi-View Stereo）       <br>
+纹理贴图：将图像的颜色信息映射到 3D 模型上，生成带纹理的模型         <br>
+<strong>结果</strong>:得到完整的 3D 模型，可能包括点云、网格或带纹理的表面</p>
+
+</section>
+
+
+    <footer class="article-footer">
     
 
-    <div class="article-details">
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/week11/">Week11</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">May 05, 2025</time>
-            </div>
-        
-
-        
     </footer>
-    
+
 
     
-</div>
-
-</header>
 </article>
-        
-            
-<article class="has-image">
-    <header class="article-header">
-        <div class="article-image">
-            <a href="/p/week10/">
-                <img src="/p/week10/1_hu_3fb1d9c13095cb15.png"
-                        srcset="/p/week10/1_hu_3fb1d9c13095cb15.png 800w, /p/week10/1_hu_e704bce62db368e9.png 1600w"
-                        width="800" 
-                        height="510" 
-                        loading="lazy"
-                        alt="Featured image of post Week10" />
-                
-            </a>
-        </div>
-    
 
-    <div class="article-details">
-    
-
-    <div class="article-title-wrapper">
-        <h2 class="article-title">
-            <a href="/p/week10/">Week10</a>
-        </h2>
-    
-        
-    </div>
-
-    
-    
-    
-    
-    <footer class="article-time">
-        
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
-  <circle cx="18" cy="18" r="4" />
-  <path d="M15 3v4" />
-  <path d="M7 3v4" />
-  <path d="M3 11h16" />
-  <path d="M18 16.496v1.504l1 1" />
-</svg>
-                <time class="article-time--published">Apr 26, 2025</time>
-            </div>
-        
-
-        
-    </footer>
     
 
     
-</div>
 
-</header>
-</article>
+     
+    
         
-    </section>
-    <nav class='pagination'>
-        
-        
+    
 
-        
-            
-                <span class='page-link current'>1</span>
-                
-            
-            
-                    <a class='page-link' href='/page/2/'>2</a>
-                
-            
-    </nav>
-
-<footer class="site-footer">
+    <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -632,6 +495,85 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
 
             </main>
         </div>
