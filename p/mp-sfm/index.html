@@ -507,22 +507,100 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 		data-flex-grow="198"
 		data-flex-basis="476px"
 	
->          <br>
-<img src="/p/mp-sfm/4.png"
-	width="1584"
-	height="612"
-	srcset="/p/mp-sfm/4_hu_86369b207431cb5f.png 480w, /p/mp-sfm/4_hu_30af051b5f8dfcbb.png 1024w"
+></p>
+<p>安装pycolmap(<strong>必须要branch中的3.12.0</strong> 其他版本均会出问题 官方源目前更新到3.11.0)    <br>
+其他版本会出现下面的报错</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>                                                                                                                                                                                     
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/reconstruct.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>                                                                                                                                             
+</span></span><span class="line"><span class="cl"><span class="n">mpsfm_rec</span> <span class="o">=</span> <span class="n">experiment</span><span class="p">(</span>                                                                                                                                                                                            
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/test/simple.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">47</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>                                                                                                                                       
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_manager</span><span class="p">(</span><span class="o">**</span><span class="n">init_info</span><span class="p">)</span>                                                                                                                                                                    
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/sfm/reconstruction_manager.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">61</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>                                                                                                                        
+</span></span><span class="line"><span class="cl"><span class="n">mpsfm_rec</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">incremental_mapper</span><span class="p">(</span>                                                                                                                                                                            
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/sfm/mapper/base.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">259</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>                                                                                                                                  
+</span></span><span class="line"><span class="cl"><span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">register_and_triangulate_init_pair</span><span class="p">(</span><span class="o">*</span><span class="n">init_pair</span><span class="p">)</span>                                                                                                                                         
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/sfm/mapper/registration.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">107</span><span class="p">,</span> <span class="ow">in</span> <span class="n">register_and_triangulate_init_pair</span>                                                                                                
+</span></span><span class="line"><span class="cl"><span class="n">candidate_points</span><span class="p">,</span> <span class="n">cam_from_world2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_pair_points_and_pose</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>                                                                                                                                      
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/sfm/mapper/registration.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">248</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_init_pair_points_and_pose</span>                                                                                                        
+</span></span><span class="line"><span class="cl"><span class="n">E_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_pose_estimator</span><span class="p">(</span><span class="n">kps1</span><span class="p">[</span><span class="n">matches</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">kps2</span><span class="p">[</span><span class="n">matches</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">camera1</span><span class="p">,</span> <span class="n">camera2</span><span class="p">)</span>                                                                                                                  
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/sfm/estimators/relative_pose.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">15</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>                                                                                                                      
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">pycolmap</span><span class="o">.</span><span class="n">essential_matrix_estimation</span><span class="p">(</span>                                                                                                                                                                       
+</span></span><span class="line"><span class="cl"><span class="ne">AttributeError</span><span class="p">:</span> <span class="n">module</span> <span class="s1">&#39;pycolmap&#39;</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;essential_matrix_estimation&#39;</span><span class="o">.</span> <span class="n">Did</span> <span class="n">you</span> <span class="n">mean</span><span class="p">:</span> <span class="s1">&#39;essential_matrix_from_pose&#39;</span><span class="err">?</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/mp-sfm/6.png"
+	width="1452"
+	height="475"
+	srcset="/p/mp-sfm/6_hu_8eff2f9ac7de4448.png 480w, /p/mp-sfm/6_hu_b99cb393cf727db6.png 1024w"
 	loading="lazy"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="258"
-		data-flex-basis="621px"
+		data-flex-grow="305"
+		data-flex-basis="733px"
 	
 ></p>
-<p>安装pycolmap(必须要branch中的3.12.0 其他版本均会出问题 官方源目前更新到3.11.0)        <br>
-<code>ssh        git clone https://github.com/Zador-Pataki/colmap.git                cd colmap                   git checkout mpsfm_colmap_merged              mkdir build &amp;&amp; cd build                cmake .. -DCUDA_ENABLED=ON -DCUDA_ARCH=&quot;86&quot; //根据你自己的显卡架构 3090是86                 make -j$(nproc)                   make install            cd ../python              python -m pip install .               python -c &quot;import pycolmap; print(pycolmap.__version__)&quot;                               </code></p>
-<p>cmake时会报此错误 需要自己下载https://github.com/PoseLib/PoseLib/archive/8028473d92c9347794a0e3d3541863b5cbb15743.zip 后复制成/root/autodl-tmp/mpsfm/colmap/build/_deps/poselib-subbuild/poselib-populate-prefix/src/8028473d92c9347794a0e3d3541863b5cbb15743.zip 路径             <br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    git clone https://github.com/Zador-Pataki/colmap.git               
+</span></span><span class="line"><span class="cl">    cd colmap                  
+</span></span><span class="line"><span class="cl">    git checkout mpsfm_colmap_merged             
+</span></span><span class="line"><span class="cl">    mkdir build &amp;&amp; cd build               
+</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=ON -DCUDA_ARCH=&#34;86&#34; //根据你自己的显卡架构 3090是86                
+</span></span><span class="line"><span class="cl">    make -j$(nproc)                  
+</span></span><span class="line"><span class="cl">    make install           
+</span></span><span class="line"><span class="cl">    cd ../python             
+</span></span><span class="line"><span class="cl">    python -m pip install .              
+</span></span><span class="line"><span class="cl">    python -c &#34;import pycolmap; print(pycolmap.__version__)&#34;                              
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>cmake时会报此错误<br>
+<img src="/p/mp-sfm/7.png"
+	width="1687"
+	height="465"
+	srcset="/p/mp-sfm/7_hu_6f8ee414168b2900.png 480w, /p/mp-sfm/7_hu_9e922a68a291b40f.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="362"
+		data-flex-basis="870px"
+	
+><br>
+需要自己下载https://github.com/PoseLib/PoseLib/archive/8028473d92c9347794a0e3d3541863b5cbb15743.zip 后mkdir -p _deps/poselib-subbuild/poselib-populate-prefix/src/ 成 路径(/root/autodl-tmp/mpsfm/colmap/build/_deps/poselib-subbuild/poselib-populate-prefix/src/8028473d92c9347794a0e3d3541863b5cbb15743.zip)</p>
+<p>出现此报错    <br>
 <img src="/p/mp-sfm/5.png"
 	width="1242"
 	height="223"
@@ -534,8 +612,27 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 		data-flex-grow="556"
 		data-flex-basis="1336px"
 	
-></p>
-
+>     <br>
+则可以强制禁用SiftGPU的CUDA</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    rm -rf *       
+</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=OFF -DCUDA_SIFTGPU_ENABLED=OFF -DGPU_ENABLED=OFF -DSIFTGPU_CUDA_ENABLED=OFF
+</span></span><span class="line"><span class="cl">    make -j$(nproc)                  
+</span></span><span class="line"><span class="cl">    make install           
+</span></span><span class="line"><span class="cl">    cd ../python             
+</span></span><span class="line"><span class="cl">    python -m pip install .  
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
