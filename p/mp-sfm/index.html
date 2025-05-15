@@ -464,14 +464,77 @@ l19 -50 -105 -235 c-161 -358 -180 -398 -185 -399 -11 0 -113 164 -150 242
 <h1 id="511">5.11
 </h1><p>跑demo有点问题 pycolmap一直导入不了哇 看到issues上也反映了类似的问题 截止到5.11晚前尚未解决</p>
 <h1 id="512">5.12
-</h1><p>读paper的时候对如下几个问题进行思考     <br>
-q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题 <br>
-场景中对称性会引起特征点选择的歧义(传统sfm依靠稀疏关键点进行匹配)-&gt;导致错误的相机位姿估计和3D重建    <br>
-单眼先验先用神经网络从单张图像预测深度图 即使是对称也可以明确图像左右侧的深度差异 主要可以引导接下来sfm选择更符合真实几何的配置 <br>
+</h1><p>读paper的时候对如下几个问题进行思考            <br>
+q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题      <br>
+场景中对称性会引起特征点选择的歧义(传统sfm依靠稀疏关键点进行匹配)-&gt;导致错误的相机位姿估计和3D重建      <br>
+单眼先验先用神经网络从单张图像预测深度图 即使是对称也可以明确图像左右侧的深度差异 主要可以引导接下来sfm选择更符合真实几何的配置          <br>
 这边想起在小红书上看到周老师的那篇murre的工作(了解了下简单的综述) 主要通过SfM点云去引导条件扩散模型进行单眼深度估计 并用2D基础模型的先验来泛化到包含对称元素的场景</p>
-<p>q2:单眼先验的密集和半密集几何约束是什么
-首先单眼先验是深度学习的模型对单张图像的深度估计或者是表面法向量估计 <br>
+<p>q2:单眼先验的密集和半密集几何约束是什么             <br>
+首先单眼先验是深度学习的模型对单张图像的深度估计或者是表面法向量估计  <br>
 密集性主要指深度图为图像中的每个像素提供了深度值-&gt;可以形成了一种连续的几何表达 半密集性主要指模型可能只为高置信度区域（如纹理丰富的区域）生成深度或法向量</p>
+<p>q3:单眼先验在束调整中的正则化作用是什么     <br>
+<img src="/p/mp-sfm/2.png"
+	width="1180"
+	height="222"
+	srcset="/p/mp-sfm/2_hu_42a769d12aaf7db8.png 480w, /p/mp-sfm/2_hu_af5db5a19998f935.png 1024w"
+	loading="lazy"
+	
+		alt="正则化"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="531"
+		data-flex-basis="1275px"
+	
+>            <br>
+如上图所示 一开始有如下思考 正则化项的值是越小越好吗？ 怎么来衡量这个点是否可靠？ wij是超参数吗？   <br>
+首先总的优化目标(损失函数)是重投影误差+lamda*深度正则化项   <br>
+(1). 值过小可能过拟合 原本存在一定的系统误差   <br>
+(2). wij​就是用来衡量这个点是否可靠  <br>
+(3). wij不是超参数 是根据每个点的特性动态计算出来的</p>
+<h1 id="514">5.14
+</h1><p>修复OmegaConf的set类型错误     <br>
+在加载colmap_options后添加    <br>
+<code>python     del colmap_options[&quot;image_names&quot;]     </code>   <br>
+<img src="/p/mp-sfm/3.png"
+	width="1107"
+	height="558"
+	srcset="/p/mp-sfm/3_hu_aa8ae32940c8f255.png 480w, /p/mp-sfm/3_hu_6299d24764c4eac9.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="476px"
+	
+>          <br>
+<img src="/p/mp-sfm/4.png"
+	width="1584"
+	height="612"
+	srcset="/p/mp-sfm/4_hu_86369b207431cb5f.png 480w, /p/mp-sfm/4_hu_30af051b5f8dfcbb.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="258"
+		data-flex-basis="621px"
+	
+></p>
+<p>安装pycolmap(必须要branch中的3.12.0 其他版本均会出问题 官方源目前更新到3.11.0)        <br>
+<code>ssh        git clone https://github.com/Zador-Pataki/colmap.git                cd colmap                   git checkout mpsfm_colmap_merged              mkdir build &amp;&amp; cd build                cmake .. -DCUDA_ENABLED=ON -DCUDA_ARCH=&quot;86&quot; //根据你自己的显卡架构 3090是86                 make -j$(nproc)                   make install            cd ../python              python -m pip install .               python -c &quot;import pycolmap; print(pycolmap.__version__)&quot;                               </code></p>
+<p>cmake时会报此错误 需要自己下载https://github.com/PoseLib/PoseLib/archive/8028473d92c9347794a0e3d3541863b5cbb15743.zip 后复制成/root/autodl-tmp/mpsfm/colmap/build/_deps/poselib-subbuild/poselib-populate-prefix/src/8028473d92c9347794a0e3d3541863b5cbb15743.zip 路径             <br>
+<img src="/p/mp-sfm/5.png"
+	width="1242"
+	height="223"
+	srcset="/p/mp-sfm/5_hu_f5715ec44121e913.png 480w, /p/mp-sfm/5_hu_d116ebd1a64897a4.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="556"
+		data-flex-basis="1336px"
+	
+></p>
 
 </section>
 
