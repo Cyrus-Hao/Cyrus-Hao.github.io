@@ -493,7 +493,22 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 (2). wij​就是用来衡量这个点是否可靠  <br>
 (3). wij不是超参数 是根据每个点的特性动态计算出来的</p>
 <h1 id="514">5.14
-</h1><p>修复OmegaConf的set类型错误     <br>
+</h1><p><a class="link" href="https://github.com/cvg/mpsfm/tree/main/third_party"  target="_blank" rel="noopener"
+    >https://github.com/cvg/mpsfm/tree/main/third_party</a>
+这个目录下的所有第三方库都要重新单独clone 其中Sky-Segmentation-and-Post-processing.zip和SuperGluePretrainedNetwork.zip只能下载zip后传到对应文件夹
+<img src="/p/mp-sfm/8.png"
+	width="900"
+	height="301"
+	srcset="/p/mp-sfm/8_hu_f08bf1343f42409a.png 480w, /p/mp-sfm/8_hu_f728168532d47449.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="299"
+		data-flex-basis="717px"
+	
+></p>
+<p>修复OmegaConf的set类型错误                       <br>
 在加载colmap_options后添加    <br>
 <code>python     del colmap_options[&quot;image_names&quot;]     </code>   <br>
 <img src="/p/mp-sfm/3.png"
@@ -508,7 +523,33 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 		data-flex-basis="476px"
 	
 ></p>
-<p>安装pycolmap(<strong>必须要branch中的3.12.0</strong> 其他版本均会出问题 官方源目前更新到3.11.0)    <br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    cd ceres-solver                           
+</span></span><span class="line"><span class="cl">    mkdir build     
+</span></span><span class="line"><span class="cl">    cd build               
+</span></span><span class="line"><span class="cl">    cmake ..
+</span></span><span class="line"><span class="cl">    make -j             
+</span></span><span class="line"><span class="cl">    sudo make install   
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    [-d pyceres] || git clone https://github.com/cvg/pyceres.git   
+</span></span><span class="line"><span class="cl">    cd pyceres       
+</span></span><span class="line"><span class="cl">    python -m pip install                  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装pycolmap(<strong>必须要branch中的3.12.0</strong> 其他版本均会出问题 官方源目前更新到3.11.0)    <br>
 其他版本会出现下面的报错</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -545,7 +586,7 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 </span></span><span class="line"><span class="cl"><span class="n">E_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_pose_estimator</span><span class="p">(</span><span class="n">kps1</span><span class="p">[</span><span class="n">matches</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">kps2</span><span class="p">[</span><span class="n">matches</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">camera1</span><span class="p">,</span> <span class="n">camera2</span><span class="p">)</span>                                                                                                                  
 </span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="s2">&#34;/datassd2/users/ananth/mpsfm/mpsfm/sfm/estimators/relative_pose.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">15</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>                                                                                                                      
 </span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">pycolmap</span><span class="o">.</span><span class="n">essential_matrix_estimation</span><span class="p">(</span>                                                                                                                                                                       
-</span></span><span class="line"><span class="cl"><span class="ne">AttributeError</span><span class="p">:</span> <span class="n">module</span> <span class="s1">&#39;pycolmap&#39;</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;essential_matrix_estimation&#39;</span><span class="o">.</span> <span class="n">Did</span> <span class="n">you</span> <span class="n">mean</span><span class="p">:</span> <span class="s1">&#39;essential_matrix_from_pose&#39;</span><span class="err">?</span> 
+</span></span><span class="line"><span class="cl"><span class="ne">AttributeError</span><span class="p">:</span> <span class="n">module</span> <span class="s1">&#39;pycolmap&#39;</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;essential_matrix_estimation&#39;</span><span class="o">.</span> <span class="n">Did</span> <span class="n">you</span> <span class="n">mean</span><span class="p">:</span> <span class="s1">&#39;essential_matrix_from_pose&#39;</span><span class="err">?</span>       
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="/p/mp-sfm/6.png"
@@ -574,16 +615,16 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    git clone https://github.com/Zador-Pataki/colmap.git               
-</span></span><span class="line"><span class="cl">    cd colmap                  
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    git clone https://github.com/Zador-Pataki/colmap.git                 
+</span></span><span class="line"><span class="cl">    cd colmap                   
 </span></span><span class="line"><span class="cl">    git checkout mpsfm_colmap_merged             
 </span></span><span class="line"><span class="cl">    mkdir build &amp;&amp; cd build               
-</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=ON -DCUDA_ARCH=&#34;86&#34; //根据你自己的显卡架构 3090是86                
-</span></span><span class="line"><span class="cl">    make -j$(nproc)                  
-</span></span><span class="line"><span class="cl">    make install           
-</span></span><span class="line"><span class="cl">    cd ../python             
-</span></span><span class="line"><span class="cl">    python -m pip install .              
-</span></span><span class="line"><span class="cl">    python -c &#34;import pycolmap; print(pycolmap.__version__)&#34;                              
+</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=ON -DCUDA_ARCH=&#34;86&#34; //根据你自己的显卡架构 3090是86                   
+</span></span><span class="line"><span class="cl">    make -j$(nproc)                   
+</span></span><span class="line"><span class="cl">    make install              
+</span></span><span class="line"><span class="cl">    cd ..             
+</span></span><span class="line"><span class="cl">    python -m pip install -e .               
+</span></span><span class="line"><span class="cl">    python -c &#34;import pycolmap; print(pycolmap.__version__)&#34;                                  
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>cmake时会报此错误<br>
@@ -599,8 +640,8 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 		data-flex-basis="870px"
 	
 ><br>
-需要自己下载https://github.com/PoseLib/PoseLib/archive/8028473d92c9347794a0e3d3541863b5cbb15743.zip 后mkdir -p _deps/poselib-subbuild/poselib-populate-prefix/src/ 成 路径(/root/autodl-tmp/mpsfm/colmap/build/_deps/poselib-subbuild/poselib-populate-prefix/src/8028473d92c9347794a0e3d3541863b5cbb15743.zip)</p>
-<p>出现此报错    <br>
+需要自己下载https://github.com/PoseLib/PoseLib/archive/8028473d92c9347794a0e3d3541863b5cbb15743.zip 后mkdir -p _deps/poselib-subbuild/poselib-populate-prefix/ src/ 成 路径(/root/autodl-tmp/mpsfm/colmap/build/_deps/poselib-subbuild/poselib-populate-prefix/src/8028473d92c9347794a0e3d3541863b5cbb15743.zip)</p>
+<p>出现此报错      <br>
 <img src="/p/mp-sfm/5.png"
 	width="1242"
 	height="223"
@@ -612,7 +653,7 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 		data-flex-grow="556"
 		data-flex-basis="1336px"
 	
->     <br>
+>          <br>
 则可以强制禁用SiftGPU的CUDA</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -624,12 +665,12 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    rm -rf *       
-</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=OFF -DCUDA_SIFTGPU_ENABLED=OFF -DGPU_ENABLED=OFF -DSIFTGPU_CUDA_ENABLED=OFF
-</span></span><span class="line"><span class="cl">    make -j$(nproc)                  
-</span></span><span class="line"><span class="cl">    make install           
-</span></span><span class="line"><span class="cl">    cd ../python             
-</span></span><span class="line"><span class="cl">    python -m pip install .  
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    rm -rf *              
+</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=OFF -DCUDA_SIFTGPU_ENABLED=OFF -DGPU_ENABLED=OFF -DSIFTGPU_CUDA_ENABLED=OFF         
+</span></span><span class="line"><span class="cl">    make -j$(nproc)                    
+</span></span><span class="line"><span class="cl">    make install             
+</span></span><span class="line"><span class="cl">    cd ..                
+</span></span><span class="line"><span class="cl">    python -m pip install -e .  //colmap路径下          
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
