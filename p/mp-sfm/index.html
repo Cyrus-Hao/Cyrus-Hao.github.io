@@ -493,36 +493,18 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 (2). wij​就是用来衡量这个点是否可靠  <br>
 (3). wij不是超参数 是根据每个点的特性动态计算出来的</p>
 <h1 id="514">5.14
-</h1><p><a class="link" href="https://github.com/cvg/mpsfm/tree/main/third_party"  target="_blank" rel="noopener"
-    >https://github.com/cvg/mpsfm/tree/main/third_party</a>
-这个目录下的所有第三方库都要重新单独clone 其中Sky-Segmentation-and-Post-processing.zip和SuperGluePretrainedNetwork.zip只能下载zip后传到对应文件夹
-<img src="/p/mp-sfm/8.png"
-	width="900"
-	height="301"
-	srcset="/p/mp-sfm/8_hu_f08bf1343f42409a.png 480w, /p/mp-sfm/8_hu_f728168532d47449.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="299"
-		data-flex-basis="717px"
-	
-></p>
-<p>修复OmegaConf的set类型错误                       <br>
-在加载colmap_options后添加    <br>
-<code>python     del colmap_options[&quot;image_names&quot;]     </code>   <br>
-<img src="/p/mp-sfm/3.png"
-	width="1107"
-	height="558"
-	srcset="/p/mp-sfm/3_hu_aa8ae32940c8f255.png 480w, /p/mp-sfm/3_hu_6299d24764c4eac9.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="198"
-		data-flex-basis="476px"
-	
-></p>
+</h1><p>clone加速/取消加速 (autodl)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">source</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">network_turbo</span>                         
+</span></span><span class="line"><span class="cl"><span class="n">unset</span> <span class="n">http_proxy</span> <span class="o">&amp;&amp;</span> <span class="n">unset</span> <span class="n">https_proxy</span>                        
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ceres-solver 官网下载压缩包后解压</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -535,21 +517,82 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    cd ceres-solver                           
-</span></span><span class="line"><span class="cl">    mkdir build     
-</span></span><span class="line"><span class="cl">    cd build               
-</span></span><span class="line"><span class="cl">    cmake ..
-</span></span><span class="line"><span class="cl">    make -j             
-</span></span><span class="line"><span class="cl">    sudo make install   
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>   
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">liblapack</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsuitesparse</span><span class="o">-</span><span class="n">dev</span> <span class="n">libcxsparse3</span> <span class="n">libgflags</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgtest</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgoogle</span><span class="o">-</span><span class="n">glog</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgoogle</span><span class="o">-</span><span class="n">glog</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgflags</span><span class="o">-</span><span class="n">dev</span> <span class="n">libatlas</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">dev</span> <span class="n">libeigen3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsuitesparse</span><span class="o">-</span><span class="n">dev</span> <span class="n">libbenchmark</span><span class="o">-</span><span class="n">dev</span>       
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">ceres</span><span class="o">-</span><span class="n">solver</span><span class="o">-</span><span class="mf">2.2.0</span>               
+</span></span><span class="line"><span class="cl"><span class="n">mkdir</span> <span class="n">build</span>                         
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">build</span>                       
+</span></span><span class="line"><span class="cl"><span class="n">cmake</span> <span class="o">-</span><span class="n">DSUITESPARSE</span><span class="o">=</span><span class="n">ON</span> <span class="o">-</span><span class="n">DBLAS_LIBRARIES</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">openblas</span><span class="o">-</span><span class="n">pthread</span><span class="o">/</span><span class="n">libblas</span><span class="o">.</span><span class="n">so</span> <span class="o">-</span><span class="n">DLAPACK_LIBRARIES</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">openblas</span><span class="o">-</span><span class="n">pthread</span><span class="o">/</span><span class="n">liblapack</span><span class="o">.</span><span class="n">so</span> <span class="o">..</span>
+</span></span><span class="line"><span class="cl"><span class="n">make</span> <span class="o">-</span><span class="n">j4</span><span class="o">//</span><span class="n">注意不要用所有的线程一起下载</span> <span class="n">否则会卡住</span> 
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">make</span> <span class="n">install</span>   
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    [-d pyceres] || git clone https://github.com/cvg/pyceres.git   
-</span></span><span class="line"><span class="cl">    cd pyceres       
-</span></span><span class="line"><span class="cl">    python -m pip install                  
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">cvg</span><span class="o">/</span><span class="n">pyceres</span>                       
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">pyceres</span>                              
+</span></span><span class="line"><span class="cl"><span class="n">export</span> <span class="n">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&#34;-DBLAS_LIBRARIES=/usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so -DLAPACK_LIBRARIES=/usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so&#34;</span>    
+</span></span><span class="line"><span class="cl"><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>                       
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>安装pycolmap(<strong>必须要branch中的3.12.0</strong> 其他版本均会出问题 官方源目前更新到3.11.0)    <br>
+</div><p><a class="link" href="https://github.com/cvg/mpsfm/tree/main/third_party"  target="_blank" rel="noopener"
+    >https://github.com/cvg/mpsfm/tree/main/third_party</a>
+这个目录下的所有第三方库都要重新单独clone 其中Sky-Segmentation-and-Post-processing.zip和SuperGluePretrainedNetwork.zip只能下载zip后传到对应文件夹</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">baegwangbin</span><span class="o">/</span><span class="n">DSINE</span>
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DepthAnything</span><span class="o">/</span><span class="n">Depth</span><span class="o">-</span><span class="n">Anything</span><span class="o">-</span><span class="n">V2</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">YvanYin</span><span class="o">/</span><span class="n">Metric3D</span>
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Parskatt</span><span class="o">/</span><span class="n">RoMa</span>
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">naver</span><span class="o">/</span><span class="n">mast3r</span>
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">apple</span><span class="o">/</span><span class="n">ml</span><span class="o">-</span><span class="n">depth</span><span class="o">-</span><span class="n">pro</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/mp-sfm/8.png"
+	width="900"
+	height="301"
+	srcset="/p/mp-sfm/8_hu_f08bf1343f42409a.png 480w, /p/mp-sfm/8_hu_f728168532d47449.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="299"
+		data-flex-basis="717px"
+	
+></p>
+<p>修复OmegaConf的set类型错误                       <br>
+在加载colmap_options后添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">del</span> <span class="n">colmap_options</span><span class="p">[</span><span class="s2">&#34;image_names&#34;</span><span class="p">]</span>    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/mp-sfm/3.png"
+	width="1107"
+	height="558"
+	srcset="/p/mp-sfm/3_hu_aa8ae32940c8f255.png 480w, /p/mp-sfm/3_hu_6299d24764c4eac9.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="476px"
+	
+></p>
+<p>安装pycolmap(<strong>必须要branch中的3.12.0</strong> 其他版本均会出问题 官方源目前更新到3.11.0)    <br>
 其他版本会出现下面的报错</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -613,21 +656,70 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    git clone https://github.com/Zador-Pataki/colmap.git                 
-</span></span><span class="line"><span class="cl">    cd colmap                   
-</span></span><span class="line"><span class="cl">    git checkout mpsfm_colmap_merged             
-</span></span><span class="line"><span class="cl">    mkdir build &amp;&amp; cd build               
-</span></span><span class="line"><span class="cl">    cmake .. -DCUDA_ENABLED=ON -DCUDA_ARCH=&#34;86&#34; //根据你自己的显卡架构 3090是86                   
-</span></span><span class="line"><span class="cl">    make -j$(nproc)                   
-</span></span><span class="line"><span class="cl">    make install              
-</span></span><span class="line"><span class="cl">    cd ..             
-</span></span><span class="line"><span class="cl">    python -m pip install -e .               
-</span></span><span class="line"><span class="cl">    python -c &#34;import pycolmap; print(pycolmap.__version__)&#34;                                  
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libboost</span><span class="o">-</span><span class="n">all</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libflann</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libgl1</span><span class="o">-</span><span class="n">mesa</span><span class="o">-</span><span class="n">dev</span> <span class="n">libglu1</span><span class="o">-</span><span class="n">mesa</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libcgal</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">qtbase5</span><span class="o">-</span><span class="n">dev</span> <span class="n">qtbase5</span><span class="o">-</span><span class="n">dev</span><span class="o">-</span><span class="n">tools</span> <span class="n">libqt5opengl5</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libmetis</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libfreeimage</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libglew</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Zador</span><span class="o">-</span><span class="n">Pataki</span><span class="o">/</span><span class="n">colmap</span><span class="o">.</span><span class="n">git</span>                 
+</span></span><span class="line"><span class="cl">    <span class="n">cd</span> <span class="n">colmap</span>                   
+</span></span><span class="line"><span class="cl">    <span class="n">git</span> <span class="n">checkout</span> <span class="n">mpsfm_colmap_merged</span>  
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="n">mkdir</span> <span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">build</span>               
+</span></span><span class="line"><span class="cl">    <span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DCMAKE_CUDA_ARCHITECTURES</span><span class="o">=</span><span class="mi">86</span> <span class="p">(</span><span class="mi">3090</span><span class="err">是</span><span class="mi">86</span><span class="p">)</span>              
+</span></span><span class="line"><span class="cl">    <span class="n">make</span> <span class="o">-</span><span class="n">j</span><span class="o">$</span><span class="p">(</span><span class="n">nproc</span><span class="p">)</span>                   
+</span></span><span class="line"><span class="cl">    <span class="n">make</span> <span class="n">install</span>              
+</span></span><span class="line"><span class="cl">    <span class="n">cd</span> <span class="o">..</span>             
+</span></span><span class="line"><span class="cl">    <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>               
+</span></span><span class="line"><span class="cl">    <span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&#34;import pycolmap; print(pycolmap.__version__)&#34;</span>                                  
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>cmake时会报此错误<br>
+</div><p>如果遇到了此问题       <br>
+<img src="/p/mp-sfm/9.png"
+	width="2100"
+	height="519"
+	srcset="/p/mp-sfm/9_hu_22a463c506fa4b1b.png 480w, /p/mp-sfm/9_hu_3f5ea03e5e9e64a.png 1024w"
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="404"
+		data-flex-basis="971px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">gcc_linux</span><span class="o">-</span><span class="mi">64</span>        
+</span></span><span class="line"><span class="cl"><span class="n">export</span> <span class="n">CMAKE_ARGS</span><span class="o">=</span><span class="s2">&#34;-DBLAS_LIBRARIES=/usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so -DLAPACK_LIBRARIES=/usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so&#34;</span> 
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">autodl</span><span class="o">-</span><span class="n">tmp</span><span class="o">/</span><span class="n">mpsfm</span><span class="o">/</span><span class="n">colmap</span>
+</span></span><span class="line"><span class="cl"><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">build</span>
+</span></span><span class="line"><span class="cl"><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>cmake时会报此错误    <br>
 <img src="/p/mp-sfm/7.png"
 	width="1687"
 	height="465"
@@ -671,6 +763,65 @@ q1:为什么单眼先验能解决sfm存在对称性导致错误关联的问题  
 </span></span><span class="line"><span class="cl">    make install             
 </span></span><span class="line"><span class="cl">    cd ..                
 </span></span><span class="line"><span class="cl">    python -m pip install -e .  //colmap路径下          
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>出现此报错手动下载skyseg.onnx到local/weight 目录下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/reconstruct.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">29</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mpsfm_rec</span> <span class="o">=</span> <span class="n">experiment</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/test/simple.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">47</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_manager</span><span class="p">(</span><span class="o">**</span><span class="n">init_info</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/sfm/reconstruction_manager.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">37</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">incremental_mapper</span> <span class="o">=</span> <span class="n">MpsfmMapper</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/baseclass.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">28</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/sfm/mapper/base.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">152</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_init</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">masks</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/extraction/base.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">302</span><span class="p">,</span> <span class="ow">in</span> <span class="n">extract_masks</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">extract_sky_mask</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/extraction/base.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">285</span><span class="p">,</span> <span class="ow">in</span> <span class="n">extract_sky_mask</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">skyseg_dir</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="n">extract_skyseg</span><span class="o">.</span><span class="n">main</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/extraction/imagewise/mask/base.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">68</span><span class="p">,</span> <span class="ow">in</span> <span class="n">main</span>
+</span></span><span class="line"><span class="cl">    <span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/extraction/__init__.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">46</span><span class="p">,</span> <span class="ow">in</span> <span class="n">load_model</span>
+</span></span><span class="line"><span class="cl">    <span class="n">model</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s2">&#34;model&#34;</span><span class="p">][</span><span class="s2">&#34;name&#34;</span><span class="p">])(</span><span class="n">conf</span><span class="p">[</span><span class="s2">&#34;model&#34;</span><span class="p">])</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/extraction/base_model.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">33</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">_download_model</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/autodl-tmp/mpsfm/mpsfm/extraction/base_model.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">48</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_download_model</span>
+</span></span><span class="line"><span class="cl">    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&#34;gdown&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">download_url</span><span class="p">,</span> <span class="s2">&#34;-O&#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">model_path</span><span class="p">)],</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">File</span> <span class="s2">&#34;/root/miniconda3/envs/mpsfm/lib/python3.10/subprocess.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">526</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run</span>
+</span></span><span class="line"><span class="cl">    <span class="k">raise</span> <span class="n">CalledProcessError</span><span class="p">(</span><span class="n">retcode</span><span class="p">,</span> <span class="n">process</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span><span class="p">:</span> <span class="n">Command</span> <span class="s1">&#39;[&#39;</span><span class="n">gdown</span><span class="s1">&#39;, &#39;</span><span class="mi">1</span><span class="n">jJpcRXAHaTR1zk4xD1kVYXtnO1</span><span class="o">-</span><span class="n">C982K</span><span class="s1">&#39;, &#39;</span><span class="o">-</span><span class="n">O</span><span class="s1">&#39;, &#39;</span><span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">autodl</span><span class="o">-</span><span class="n">tmp</span><span class="o">/</span><span class="n">mpsfm</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">weights</span><span class="o">/</span><span class="n">skyseg</span><span class="o">.</span><span class="n">onnx</span><span class="s1">&#39;]&#39;</span> <span class="n">returned</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="n">exit</span> <span class="n">status</span> <span class="mf">1.</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
